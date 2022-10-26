@@ -1,1 +1,1 @@
-export type { Pokectmon } from "./Pokect";
+export type { PokectmonListType } from "./Pokect";
