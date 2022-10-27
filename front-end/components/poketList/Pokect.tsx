@@ -11,8 +11,8 @@ const Pokect:NextPage<PokectmonListType> = ({id, name, front_default ,types}) =>
              <Number>{`No.${id}`}</Number>
              <Name>{name}</Name>
              <TypesWapper>
-                <TypesBox>{types[0]}</TypesBox>
-                {types[2] && <TypesBox>{types[1]}</TypesBox>}
+                {/* <TypesBox>{types[0]}</TypesBox> */}
+                {/* {types[2] && <TypesBox>{types[1]}</TypesBox>} */}
              </TypesWapper>
          </PoketWapper>
     )

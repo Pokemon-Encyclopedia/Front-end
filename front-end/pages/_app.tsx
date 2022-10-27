@@ -2,13 +2,16 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { ApolloProvider } from '@apollo/client'
 import client from '../apollo/client'
+import { RecoilRoot } from 'recoil';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <RecoilRoot>
       <ApolloProvider client={client}>
         <Component {...pageProps} />
       </ApolloProvider>
+      </RecoilRoot>
     </>
   );
 }
