@@ -7,10 +7,11 @@ import { PokectmonListType } from '../../types';
 const Pokect:NextPage<PokectmonListType> = ({id, name, front_default ,types}) => {
     return (
          <PoketWapper>
-            { front_default ? <Image height={100} width={`100%`} alt={"포켓몬 캐릭"} src={front_default} /> : <Hellow /> }
+            { front_default ? <Image height={200} width={`100%`} quality={100} alt={"포켓몬 캐릭"} objectFit={'cover'} src={front_default} /> : <Hellow /> }
              <Number>{`No.${id}`}</Number>
              <Name>{name}</Name>
              <TypesWapper>
+                <TypesBox>{"water"}</TypesBox>
                 {/* <TypesBox>{types[0]}</TypesBox> */}
                 {/* {types[2] && <TypesBox>{types[1]}</TypesBox>} */}
              </TypesWapper>
@@ -28,12 +29,13 @@ const Hellow = styled.div`
 `;
 
 const PoketWapper = styled.div`
-    width: 250px;
-    height: 300px;
+    width: 270px;
+    height: 320px;
     
     display: flex;
     flex-direction: column;
     
+    padding: 10px 10px;
     background-color: white;
     border-radius: 5px;
 `;
@@ -50,6 +52,7 @@ const Name = styled.div`
     height: 50px;
     
     font-size: 20px;
+    font-weight: bold;
 `;
 
 const TypesWapper = styled.div`
@@ -69,6 +72,7 @@ const TypesBox = styled.div`
     
     background-color: green;
     border-radius: 5px;
+    color: white;
     
 `;
 

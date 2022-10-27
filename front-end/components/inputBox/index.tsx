@@ -11,7 +11,7 @@ const InputBox:NextPage = () => {
     return (
         <InputBoxWapper>
             <InputWapper>
-            <input  onChange={({target}) => setValue(target.value)} value={value}/>
+            <input placeholder='검색할 포켓몬이름을 입력해주세요'  onChange={({target}) => setValue(target.value)} value={value}/>
             </InputWapper>
             <SubmitBtn>Search</SubmitBtn>
         </InputBoxWapper>
@@ -30,7 +30,7 @@ const InputBoxWapper = styled.div`
 `;
 
 const InputWapper = styled.div`
-    width: 400px;
+    width: 430px;
     height: 60%;
 
     display: flex;
@@ -41,13 +41,16 @@ const InputWapper = styled.div`
         width: 100%;
         height: 100%;
         font-size: 20px;
+        font-family: EarlyFontDiary;
+        outline: none;
     }
 `;
 
 const SubmitBtn = styled.button`
-    width: 100px;
+    width: 70px;
     height: 60%;
 
+    font-family: EarlyFontDiary;
     background-color: black;
     color: white;
 `;
