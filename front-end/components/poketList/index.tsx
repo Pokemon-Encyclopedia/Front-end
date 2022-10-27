@@ -47,6 +47,7 @@ const PokectList:NextPage = () => {
     if (loading) {return <h2>Loading...</h2>}
     if (error) {return <h1>에러 발생</h1>}
     const searchDataList = POKET?.findAll.filter((data) => data.name.toLowerCase().includes(searchValue[0].toLocaleString()))
+    console.log(searchDataList);
 
     return (
         <PoketListWapper>
@@ -63,7 +64,6 @@ const PoketListWapper = styled.div`
     width: 100%;
     height: 100%;
     padding: 10px 50px;
-    background-color: #FAEBD7;
 
     display: flex;
     flex-wrap: wrap;
