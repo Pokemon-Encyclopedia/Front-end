@@ -6,6 +6,7 @@ import { gql, useQuery } from '@apollo/client';
 import { useRecoilState } from 'recoil';
 import { searchValueAtom } from '../../Util/recoil/state';
 import { useEffect, useState } from 'react';
+import { pokectName } from '../../metadata/pokectName';
 
 interface getPoketmonType {
     findAll :PokectmonListType[]
@@ -25,8 +26,9 @@ query {
 
 const PokectList:NextPage = () => {
     const searchValue = useRecoilState(searchValueAtom);
+    const [pokectList , setPokectList] = useState<getPoketmonType>();
     
-    const { data:POKET , loading, error } = useQuery<getPoketmonType>(
+    const { data , loading, error } = useQuery<getPoketmonType>(
         GET_POKETMONS,
         searchValue 
         ? {
@@ -42,19 +44,20 @@ const PokectList:NextPage = () => {
             type: 'POKECT',
             }
         } 
-        );
-
+    );
     if (loading) {return <h2>Loading...</h2>}
     if (error) {return <h1>에러 발생</h1>}
-    const searchDataList = POKET?.findAll.filter((data) => data.name.toLowerCase().includes(searchValue[0].toLocaleString()))
+    const List = data?.findAll.map((i) => ({...i , pokectmonName : pokectName[i.id]}))      
+   const searchDataList = List && List.filter((data) => data.pokectmonName.toLowerCase().includes(searchValue[0].toLocaleString()))
     console.log(searchDataList);
+    
 
     return (
         <PoketListWapper>
-         {POKET && searchDataList && searchValue ?  searchDataList?.map(i => (
-          <Pokect key={i.id} id={i.id} name={i.name} front_default={i.front_default} types={i.types} />
-        )) : POKET?.findAll?.map(i => (
-            <Pokect key={i.id} id={i.id} name={i.name} front_default={i.front_default} types={i.types} />
+         {List && searchDataList && searchValue ? searchDataList?.map(i => (
+          <Pokect key={i.id} id={i.id} name={i.pokectmonName} front_default={i.front_default} types={i.types} />
+        )) : List?.map(i => (
+            <Pokect key={i.id} id={i.id} name={i.pokectmonName} front_default={i.front_default} types={i.types} />
           ))}
         </PoketListWapper>
     )

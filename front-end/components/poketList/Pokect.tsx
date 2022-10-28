@@ -7,8 +7,7 @@ import { PokemonTypesData } from '../../metadata/pokectType';
 
 const Pokect:NextPage<PokectmonListType> = ({id, name, front_default ,types}) => {
     const Pokemontypes:PokectmontypeType[] = PokemonTypesData.filter((i,index) => i.usValue == types[index]);
-        console.log(PokemonTypesData);
-        console.log(Pokemontypes);
+    
     
     return (
          <PoketWapper>
@@ -20,9 +19,8 @@ const Pokect:NextPage<PokectmonListType> = ({id, name, front_default ,types}) =>
              )}
              
              <TypesWapper>
-                {/* <TypesBox>{"water"}</TypesBox> */}
-                {/* <TypesBox>{types[0]}</TypesBox> */}
-                {/* {types[2] && <TypesBox>{types[1]}</TypesBox>} */}
+                <TypesBox>{types[1]}</TypesBox>
+                {/* {types[1] && <TypesBox>{types[1]}</TypesBox>} */}
              </TypesWapper>
          </PoketWapper>
     )
