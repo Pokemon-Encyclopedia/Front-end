@@ -5,7 +5,7 @@ import { PokectmonListType } from '../../types';
 import { gql, useQuery } from '@apollo/client';
 import { useRecoilState } from 'recoil';
 import { searchValueAtom } from '../../Util/recoil/state';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { pokectName } from '../../metadata/pokectName';
 
 interface getPoketmonType {
@@ -55,9 +55,11 @@ const PokectList:NextPage = () => {
     return (
         <PoketListWapper>
          {List && searchDataList && searchValue ? searchDataList?.map(i => (
-          <Pokect key={i.id} id={i.id} name={i.pokectmonName} front_default={i.front_default} types={i.types} />
+          <Pokect key={i.id} id={i.id} name={i.pokectmonName} front_default={i.front_default} types={i.types} 
+          />
         )) : List?.map(i => (
-            <Pokect key={i.id} id={i.id} name={i.pokectmonName} front_default={i.front_default} types={i.types} />
+            <Pokect key={i.id} id={i.id} name={i.pokectmonName} front_default={i.front_default} types={i.types}
+            />
           ))}
         </PoketListWapper>
     )

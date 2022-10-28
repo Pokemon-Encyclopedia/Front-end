@@ -1,25 +1,36 @@
 import { NextPage } from 'next';
 import Image from "next/image";
+import { useRouter } from 'next/router';
 
 import styled from "@emotion/styled";
 import { PokectmonListType, PokectmontypeType } from '../../types';
 import { PokemonTypesData } from '../../metadata/pokectType';
+import { useCallback } from 'react';
 
 const Pokect:NextPage<PokectmonListType> = ({id, name, front_default ,types}) => {
+    console.log(types[0] , types[1]);
+    const router = useRouter();
+
+
+    const handleClickCard = useCallback(
+        (id: number) => {
+          router.push(`item/${id}`);
+        },
+        [router],
+      );
+
     const Pokemontypes:PokectmontypeType[] = PokemonTypesData.filter((i,index) => i.usValue == types[index]);
     
-    
     return (
-         <PoketWapper>
-            { front_default ? <Image height={200} width={`100%`} quality={100} alt={"포켓몬 캐릭"} objectFit={'cover'} src={front_default} /> : <Hellow /> }
+         <PoketWapper onClick={() => handleClickCard(id)}>
+            { front_default ? <Image height={200} width={`100%`} quality={100} alt={"포켓몬 캐릭터"} objectFit={'cover'} src={front_default} /> : <Hellow /> }
              <Number>{`No.${id}`}</Number>
              <Name>{name}</Name>
-             {
-             Pokemontypes.map((i) => <TypesWapper >{i.usValue}</TypesWapper>
-             )}
-             
+             {/* {
+             Pokemontypes.map((i) => <TypesBox >{i.usValue}</TypesBox>
+             )} */}
              <TypesWapper>
-                <TypesBox>{types[1]}</TypesBox>
+                <TypesBox>{types[0]}</TypesBox>
                 {/* {types[1] && <TypesBox>{types[1]}</TypesBox>} */}
              </TypesWapper>
          </PoketWapper>
