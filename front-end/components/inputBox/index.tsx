@@ -9,13 +9,8 @@ const InputBox:NextPage = () => {
     return (
         <InputBoxWapper>
             <InputWapper>
-            <input placeholder='검색할 포켓몬이름을 입력해주세요'  onChange={({target}) => setValue(target.value)} value={value}/>
+            <input placeholder='포켓몬이름을 입력하세요'  onChange={({target}) => setValue(target.value)} value={value}/>
             </InputWapper>
-            <SubmitBtn>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                </svg>
-            </SubmitBtn>
         </InputBoxWapper>
     )
 }
@@ -36,26 +31,29 @@ const InputWapper = styled.div`
 
     display: flex;
     align-items: center;
-    border: 1px solid black;
-
+    justify-content: center;
+    font-family: EarlyFontDiary;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     input{
-        width: 100%;
-        height: 100%;
+        width: 90%;
+        height: 70%;
         font-size: 20px;
-        font-family: EarlyFontDiary;
         outline: none;
+        border: none;
     }
 `;
 
-const SubmitBtn = styled.button`
-    width: 50px;
-    height: 50%;
+// const SubmitBtn = styled.button`
+//     width: 50px;
+//     height: 50%;
 
-    font-family: EarlyFontDiary;
-    background-color: black;
-    color: white;
-`;
-
-
+//     font-family: EarlyFontDiary;
+//     background-color: black;
+//     color: white;
+//     border-top-right-radius: 10px;
+//     border-bottom-right-radius: 10px;
+// `;
 
 export default InputBox;

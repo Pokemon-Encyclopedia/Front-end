@@ -37,10 +37,13 @@ const PokectList:NextPage = () => {
     return (
         <PoketListWapper>
           <ImgWapper>
-            { data?.front_default ? <Image height={200} width={`100%`} quality={100} alt={"포켓몬 캐릭터"} objectFit={'cover'} src={data?.front_default ?? ""} /> : <Hellow /> }
-            { data?.back_default ? <Image height={200} width={`100%`} quality={100} alt={"포켓몬 캐릭터"} objectFit={'cover'} src={data?.back_default ?? ""} /> : <Hellow /> }
-
+            { data?.front_default ? <Image height={200} width={`100%`} quality={100} alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.front_default ?? ""} /> : <Hellow /> }
+            { data?.back_default ? <Image height={200} width={`100%`} quality={100} alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.back_default ?? ""} /> : <Hellow /> }
           </ImgWapper>
+          <ContentWapper>
+            {/* <Number>{`No.${data?.id}`}</Number>
+            <Name>{data?.name}</Name> */}
+          </ContentWapper>
         </PoketListWapper>
     )
 }
@@ -53,12 +56,12 @@ const PoketListWapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    border: 1px solid black;
 `;
 
 const ImgWapper = styled.div`
 
 `;
-
 const Hellow = styled.div`
     width: 250px;
     height: 200px;
@@ -66,6 +69,10 @@ const Hellow = styled.div`
     background-color: blue;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+`;
+
+const ContentWapper = styled.div`
+
 `;
 
 
