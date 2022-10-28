@@ -22,15 +22,11 @@ const Pokect:NextPage<PokectmonListType> = ({id, name, front_default ,types}) =>
     return (
          <PoketWapper onClick={() => handleClickCard(id)}>
             <Hellow /> 
-            {/* { front_default && <Image height={200} width={`100%`} quality={100} alt={"포켓몬 캐릭터"} objectFit={'cover'} src={front_default} /> } */}
+            { front_default && <Image height={200} width={`100%`} quality={100} alt={"포켓몬 캐릭터"} objectFit={'cover'} src={front_default} /> }
              <Number>{`No.${id}`}</Number>
              <Name>{name}</Name>
              <TypesWapper>
-             {
-                Pokemontypes.map((i) => <TypesBox style={{backgroundColor:`${i.color}`}} >{i.value}</TypesBox>
-             )}
-                {/* <TypesBox>{types[0]}</TypesBox>
-                {types[1] && <TypesBox>{types[1]}</TypesBox>} */}
+             { Pokemontypes.map((i) => <TypesBox style={{backgroundColor:`${i.color}`}} >{i.value}</TypesBox>) }
              </TypesWapper>
          </PoketWapper>
     )

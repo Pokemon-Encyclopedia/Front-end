@@ -27,40 +27,40 @@ query {
 const PokectList:NextPage = () => {
     const searchValue = useRecoilState(searchValueAtom);
     
-    // const { data , loading, error } = useQuery<getPoketmonType>(
-    //     GET_POKETMONS,
-    //     searchValue 
-    //     ? {
-    //         variables: {
-    //         isAdult: false,
-    //         type: 'POKECT',
-    //         search: searchValue,
-    //         } 
-    //     }   
-    //     : {
-    //         variables: {
-    //         isAdult: false,
-    //         type: 'POKECT',
-    //         }
-    //     } 
-    // );
-    // if (loading) {return <h2>Loading...</h2>}
-    // if (error) {return <h1>에러 발생</h1>}
-//     const List = data?.findAll.map((i) => ({...i , pokectmonName : pokectName[i.id]}))      
-//    const searchDataList = List && List.filter((data) => data.pokectmonName.toLowerCase().includes(searchValue[0].toLocaleString()))
-//     console.log(searchDataList);
+    const { data , loading, error } = useQuery<getPoketmonType>(
+        GET_POKETMONS,
+        searchValue 
+        ? {
+            variables: {
+            isAdult: false,
+            type: 'POKECT',
+            search: searchValue,
+            } 
+        }   
+        : {
+            variables: {
+            isAdult: false,
+            type: 'POKECT',
+            }
+        } 
+    );
+    if (loading) {return <h2>Loading...</h2>}
+    if (error) {return <h1>에러 발생</h1>}
+    const List = data?.findAll.map((i) => ({...i , pokectmonName : pokectName[i.id]}))      
+   const searchDataList = List && List.filter((data) => data.pokectmonName.toLowerCase().includes(searchValue[0].toLocaleString()))
+    console.log(searchDataList);
     
 
     return (
         <PoketListWapper>
-         {/* {List && searchDataList && searchValue ? searchDataList?.map(i => (
+         {List && searchDataList && searchValue ? searchDataList?.map(i => (
           <Pokect key={i.id} id={i.id} name={i.pokectmonName} front_default={i.front_default} types={i.types} 
           />
         )) : List?.map(i => (
             <Pokect key={i.id} id={i.id} name={i.pokectmonName} front_default={i.front_default} types={i.types}
             />
-          ))} */}
-           <Pokect key={1} id={1} name={"리자몽"} front_default={"a"} types={["POISON","ICE"]} />
+          ))}
+           {/* <Pokect key={1} id={1} name={"리자몽"} front_default={"a"} types={["POISON","ICE"]} /> */}
         </PoketListWapper>
     )
 }
