@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import styled from "@emotion/styled";
 import Pokect from './Pokect';
 import { PokectmonListType } from '../../types';
@@ -10,42 +10,12 @@ import { pokectName } from '../../metadata/pokectName';
 
 interface getPoketmonType {
     findAll :PokectmonListType[]
-}
-
-
-const GET_POKETMONS = gql`
-query {
-    findAll {
-        id
-        name
-        front_default
-        types
-    }
   }
-`;
 
-const PokectList:NextPage = () => {
+
+const PokectList:NextPage<{data: getPoketmonType}> = ({data}) => {
     const searchValue = useRecoilState(searchValueAtom);
-    
-    const { data , loading, error } = useQuery<getPoketmonType>(
-        GET_POKETMONS,
-        searchValue 
-        ? {
-            variables: {
-            isAdult: false,
-            type: 'POKECT',
-            search: searchValue,
-            } 
-        }   
-        : {
-            variables: {
-            isAdult: false,
-            type: 'POKECT',
-            }
-        } 
-    );
-    if (loading) {return <h2>Loading...</h2>}
-    if (error) {return <h1>에러 발생</h1>}
+
     const List = data?.findAll.map((i) => ({...i , pokectmonName : pokectName[i.id]}))      
    const searchDataList = List && List.filter((data) => data.pokectmonName.toLowerCase().includes(searchValue[0].toLocaleString()))
     console.log(searchDataList);
@@ -65,6 +35,7 @@ const PokectList:NextPage = () => {
     )
 }
 
+
 const PoketListWapper = styled.div`
     width: 100%;
     height: 100%;
@@ -74,7 +45,5 @@ const PoketListWapper = styled.div`
     flex-wrap: wrap;
     gap: 1rem;
 `;
-
-
 
 export default PokectList;

@@ -2,24 +2,13 @@ import { GetServerSideProps, NextPage } from 'next';
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
 import { PokectmonListType, PokectmontypeType } from '../../types';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useRecoilState } from 'recoil';
 import { searchValueAtom } from '../../Util/recoil/state';
 import { pokectName } from '../../metadata/pokectName';
 import Image from "next/image";
 import { PokemonTypesData } from '../../metadata/pokectType';
-
-const GET_POKETMON = gql`
-query getPokectmon($poketId : ID!) {
-    findPokemonById(id : $poketId) {
-        id
-        name
-        front_default
-        back_default
-        types
-    }
-  }
-`;
+import { GET_POKETMON } from '../../gql';
 
 const PokectList:NextPage = () => {
     const { id } = useParams();
@@ -33,7 +22,7 @@ const PokectList:NextPage = () => {
     );
     if (loading) {return <h2>Loading...</h2>}
     if (error) {return <h1>에러 발생</h1>}
-    
+
     const Pokemontypes:PokectmontypeType[] = PokemonTypesData.filter((i) =>  i.usValue === data?.types[0] ||  i.usValue === data?.types[1]);    
 
 
@@ -42,16 +31,16 @@ const PokectList:NextPage = () => {
     return (
         <PoketListWapper>
           <ImgWapper>
-            { data?.front_default && <Image height={200} width={`100%`} quality={100} alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.front_default ?? ""} />  }
-            { data?.back_default && <Image height={200} width={`100%`} quality={100} alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.back_default ?? ""} />}
-            <Hellow/>
-            <Hellow/>
+            { data?.front_default && <Image height={400} width={`48%%`} quality={100} alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.front_default ?? ""} />  }
+            { data?.back_default && <Image height={400} width={`48%%`} quality={100} alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.back_default ?? ""} />}
+            {/* <Hellow/>
+            <Hellow/> */}
           </ImgWapper>
           <ContentWapper>
             <Number>{`No.${data?.id}`}</Number>
             <Name>{data?.name}</Name>
-            <Number>No.1</Number>
-            <Name>리자몽</Name>
+            {/* <Number>No.1</Number>
+            <Name>리자몽</Name> */}
             <TypesWapper>
              {
                 Pokemontypes.map((i) => <TypesBox style={{backgroundColor:`${i.color}`}} >{i.value}</TypesBox>
