@@ -1,39 +1,41 @@
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import styled from "@emotion/styled";
-import { useParams } from "react-router-dom";
-import { getPoketmonType, PokectmonListType, PokectmontypeType } from '../../types';
+import { PokectmonListType, PokectmontypeType } from '../../types';
 import { useQuery } from '@apollo/client';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { initPoketmonList, searchValueAtom } from '../../Util/recoil/state';
-import { pokectName } from '../../metadata/pokectName';
+import { useRecoilValue } from 'recoil';
+import { initPoketmonList } from '../../Util/recoil/state';
 import Image from "next/image";
 import { PokemonTypesData } from '../../metadata/pokectType';
-import { GET_POKETMON, GET_POKETMONS } from '../../gql';
+import { GET_POKETMON } from '../../gql';
+import Layout from '../../components/Phead';
 
 
 const PokectDetail:NextPage<{data:PokectmonListType}> = ({data}) => {
     const Pokemontypes:PokectmontypeType[] = PokemonTypesData.filter((i) =>  i.usValue === data?.types[0] ||  i.usValue === data?.types[1]);    
 
     return (
-        <PoketListWapper>
-          <ImgWapper>
-            { data?.front_default && <Image height={400} width={`48%%`} quality={100} alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.front_default ?? ""} />  }
-            { data?.back_default && <Image height={400} width={`48%%`} quality={100} alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.back_default ?? ""} />}
-            {/* <Hellow/>
-            <Hellow/> */}
-          </ImgWapper>
-          <ContentWapper>
-            <Number>{`No.${data?.id}`}</Number>
-            <Name>{data?.name}</Name>
-            {/* <Number>No.1</Number>
-            <Name>리자몽</Name> */}
-            <TypesWapper>
-             { Pokemontypes.map((i) => <TypesBox style={{backgroundColor:`${i.color}`}} >{i.value}</TypesBox> )}
-                {/* <TypesBox>{"풀"}</TypesBox>
-                <TypesBox>{"독"}</TypesBox> */}
-             </TypesWapper>
-          </ContentWapper>
-        </PoketListWapper>
+        <>
+        <Layout seoTitle={"포켓몬 상세페이지"} />
+            <PoketListWapper>
+            <ImgWapper>
+                { data?.front_default && <Image height={400} width={`48%%`} quality={100} alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.front_default ?? ""} />  }
+                { data?.back_default && <Image height={400} width={`48%%`} quality={100} alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.back_default ?? ""} />}
+                {/* <Hellow/>
+                <Hellow/> */}
+            </ImgWapper>
+            <ContentWapper>
+                <Number>{`No.${data?.id}`}</Number>
+                <Name>{data?.name}</Name>
+                {/* <Number>No.1</Number>
+                <Name>리자몽</Name> */}
+                <TypesWapper>
+                { Pokemontypes.map((i) => <TypesBox style={{backgroundColor:`${i.color}`}} >{i.value}</TypesBox> )}
+                    {/* <TypesBox>{"풀"}</TypesBox>
+                    <TypesBox>{"독"}</TypesBox> */}
+                </TypesWapper>
+            </ContentWapper>
+            </PoketListWapper>
+        </>
     )
 }
 

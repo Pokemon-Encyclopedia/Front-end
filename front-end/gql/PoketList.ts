@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const GET_POKETMONS = gql`
+export const GET_POKETLISTS = gql`
 query {
   findAll {
       id

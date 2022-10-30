@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import styled from "@emotion/styled";
 import Pokect from './Pokect';
-import { getPoketmonType, PokectmonListType } from '../../types';
+import { getPoketmonType } from '../../types';
 import { useRecoilState } from 'recoil';
 import { searchValueAtom } from '../../Util/recoil/state';
 import { pokectName } from '../../metadata/pokectName';

@@ -1,1 +1,2 @@
-export * from "./Pokect";
+export * from "./PokectLIst";
+export * from "./PoketmonType"
