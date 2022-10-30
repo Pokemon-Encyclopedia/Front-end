@@ -1,19 +1,16 @@
 import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import InputBox from '../components/inputBox'
 import PokectList from '../components/poketList'
-import { searchValueAtom } from '../Util/recoil/state'
-import { PokectmonListType } from '../types';
-import { gql, useQuery } from '@apollo/client';
+import { initPoketmonList, searchValueAtom } from '../Util/recoil/state'
+import { getPoketmonType, PokectmonListType } from '../types';
+import { useQuery } from '@apollo/client';
 import { GET_POKETMONS } from '../gql'
 
-
-interface getPoketmonType {
-  findAll :PokectmonListType[]
-}
-
 const Home: NextPage<{data: getPoketmonType}> = ({data}) => {
+  const setInitPoketmonList = useSetRecoilState(initPoketmonList);
+  setInitPoketmonList(data.findAll);
   return (
     <>
       <Head>
@@ -49,6 +46,7 @@ export const getStaticProps:GetStaticProps = () => {
   );
   if (loading) {return <h2>Loading...</h2>}
   if (error) {return <h1>에러 발생</h1>}
+  
   
   return {
       props: {

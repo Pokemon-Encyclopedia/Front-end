@@ -6,6 +6,10 @@ export interface PokectmonListType{
     types : string[],
 }
 
+export interface getPoketmonType {
+    findAll :PokectmonListType[]
+  }
+
 export interface PokectmontypeType{
     usValue:string,
     value:string,

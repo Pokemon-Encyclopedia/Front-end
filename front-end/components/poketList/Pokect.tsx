@@ -1,7 +1,6 @@
 import { NextPage } from 'next';
 import Image from "next/image";
 import { useRouter } from 'next/router';
-
 import styled from "@emotion/styled";
 import { PokectmonListType, PokectmontypeType } from '../../types';
 import { PokemonTypesData } from '../../metadata/pokectType';

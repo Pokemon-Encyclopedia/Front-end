@@ -1,32 +1,18 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
-import { PokectmonListType, PokectmontypeType } from '../../types';
+import { getPoketmonType, PokectmonListType, PokectmontypeType } from '../../types';
 import { useQuery } from '@apollo/client';
-import { useRecoilState } from 'recoil';
-import { searchValueAtom } from '../../Util/recoil/state';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { initPoketmonList, searchValueAtom } from '../../Util/recoil/state';
 import { pokectName } from '../../metadata/pokectName';
 import Image from "next/image";
 import { PokemonTypesData } from '../../metadata/pokectType';
-import { GET_POKETMON } from '../../gql';
+import { GET_POKETMON, GET_POKETMONS } from '../../gql';
 
-const PokectList:NextPage = () => {
-    const { id } = useParams();
-        
-    const { data , loading, error } = useQuery<PokectmonListType>(
-        GET_POKETMON,{
-            variables: {
-                poketId: id,
-            },
-        }
-    );
-    if (loading) {return <h2>Loading...</h2>}
-    if (error) {return <h1>에러 발생</h1>}
 
+const PokectDetail:NextPage<{data:PokectmonListType}> = ({data}) => {
     const Pokemontypes:PokectmontypeType[] = PokemonTypesData.filter((i) =>  i.usValue === data?.types[0] ||  i.usValue === data?.types[1]);    
-
-
-    
 
     return (
         <PoketListWapper>
@@ -42,9 +28,7 @@ const PokectList:NextPage = () => {
             {/* <Number>No.1</Number>
             <Name>리자몽</Name> */}
             <TypesWapper>
-             {
-                Pokemontypes.map((i) => <TypesBox style={{backgroundColor:`${i.color}`}} >{i.value}</TypesBox>
-             )}
+             { Pokemontypes.map((i) => <TypesBox style={{backgroundColor:`${i.color}`}} >{i.value}</TypesBox> )}
                 {/* <TypesBox>{"풀"}</TypesBox>
                 <TypesBox>{"독"}</TypesBox> */}
              </TypesWapper>
@@ -52,6 +36,40 @@ const PokectList:NextPage = () => {
         </PoketListWapper>
     )
 }
+
+export const getStaticPaths:GetStaticPaths = () => {
+    const InitPoketmonList = useRecoilValue(initPoketmonList);
+
+    const ids =  InitPoketmonList.map((poket) => {
+      return { params: { id: poket.id.toString() } };
+    });
+    return {
+      paths: ids,
+      fallback: false,
+    };
+  }
+
+
+export const getStaticProps:GetStaticProps = async(ctx) => {
+        const id = ctx.params?.id;
+
+        const { data:POKETMON , loading, error } = useQuery<PokectmonListType>(
+            GET_POKETMON,{
+                variables: {
+                    poketId: id,
+                },
+            }
+        );
+        if (loading) {return <h2>Loading...</h2>}
+        if (error) {return <h1>에러 발생</h1>}
+  
+        return {
+          props: {
+            data:POKETMON
+          },
+        };
+};
+
 
 const PoketListWapper = styled.div`
     width: 100%;
@@ -124,35 +142,4 @@ const TypesBox = styled.div`
     
 `;
 
-// export const getServerSideProps: GetServerSideProps = async contexts => {
-//     try {
-//       if (contexts?.params?.number) {
-//         const id = Number(contexts.params.id);
-
-//         const { data , loading, error } = useQuery<PokectmonListType>(
-//             GET_POKETMON,{
-//                 variables: {
-//                     poketId: id,
-//                 },
-//             }
-//     );
-  
-//         return {
-//           props: {
-//             id: contexts.params.id,
-//           },
-//         };
-//       }
-//     } catch (error) {
-//       console.error('Error', error);
-//     }
-  
-//     return {
-//       props: {
-//         id: 0,
-//       },
-//     };
-//   };
-
-
-export default PokectList;
+export default PokectDetail;

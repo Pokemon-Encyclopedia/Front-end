@@ -1,17 +1,10 @@
-import { GetStaticProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import styled from "@emotion/styled";
 import Pokect from './Pokect';
-import { PokectmonListType } from '../../types';
-import { gql, useQuery } from '@apollo/client';
+import { getPoketmonType, PokectmonListType } from '../../types';
 import { useRecoilState } from 'recoil';
 import { searchValueAtom } from '../../Util/recoil/state';
-import { useCallback, useEffect, useState } from 'react';
 import { pokectName } from '../../metadata/pokectName';
-
-interface getPoketmonType {
-    findAll :PokectmonListType[]
-  }
-
 
 const PokectList:NextPage<{data: getPoketmonType}> = ({data}) => {
     const searchValue = useRecoilState(searchValueAtom);
