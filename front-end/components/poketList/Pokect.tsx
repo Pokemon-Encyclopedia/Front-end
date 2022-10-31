@@ -2,11 +2,10 @@ import { NextPage } from 'next';
 import Image from "next/image";
 import { useRouter } from 'next/router';
 import styled from "@emotion/styled";
-import { PokectmonListType, PokectmontypeType } from '../../types';
-import { PokemonTypesData } from '../../metadata/pokectType';
+import { PokectmonListType } from '../../types';
 import { useCallback } from 'react';
 
-const Pokect:NextPage<PokectmonListType> = ({id, name, front_default ,types}) => {
+const Pokect:NextPage<PokectmonListType> = ({id, name, image}) => {
     const router = useRouter();
 
     const handleClickCard = useCallback(
@@ -16,32 +15,18 @@ const Pokect:NextPage<PokectmonListType> = ({id, name, front_default ,types}) =>
         [router],
       );
 
-    const Pokemontypes:PokectmontypeType[] = PokemonTypesData.filter((i) =>  i.usValue === types[0] ||  i.usValue === types[1]);    
-
     return (
          <PoketWapper onClick={() => handleClickCard(id)}>
-            { front_default && <Image height={200} width={`100%`} quality={100} alt={"포켓몬 캐릭터"} objectFit={'cover'} src={front_default} /> }
+            { image && <Image height={200} width={`100%`} quality={100} alt={"포켓몬 캐릭터"} objectFit={'cover'} src={image} /> }
              <Number>{`No.${id}`}</Number>
              <Name>{name}</Name>
-             <TypesWapper>
-             { Pokemontypes.map((i) => <TypesBox style={{backgroundColor:`${i.color}`}} >{i.value}</TypesBox>) }
-             </TypesWapper>
          </PoketWapper>
     )
 }
 
-const Hellow = styled.div`
-    width: 250px;
-    height: 200px;
-    
-    background-color: blue;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-`;
-
 const PoketWapper = styled.div`
     width: 270px;
-    height: 320px;
+    height: 300px;
     
     display: flex;
     flex-direction: column;
@@ -65,31 +50,11 @@ const Name = styled.div`
     width: 100%;
     height: 50px;
     
-    font-size: 20px;
-    font-weight: bold;
-`;
-
-const TypesWapper = styled.div`
-    width: 100%;
-    height: 30px;
-
     display: flex;
-`;
-
-const TypesBox = styled.div`
-    width: 50%;
-    height: 30px;
-
-    display: flex;
-    justify-content: center;
     align-items: center;
     
-    margin: 0 5px;
-    background-color: green;
-    border-radius: 5px;
-    color: white;
-    
+    font-weight: bold;
+    font-size: 22px;
 `;
-
 
 export default Pokect;

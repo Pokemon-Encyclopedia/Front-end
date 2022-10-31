@@ -41,8 +41,8 @@ const PokectDetail:NextPage = () => {
         <Layout seoTitle={"포켓몬 상세페이지"} />
             <PoketListWapper>
             <ImgWapper>
-               <Image height={400} width={400} quality={100} alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.findPokemonById.front_default ?? ""} />  
-                <Image height={400} width={400} quality={100} alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.findPokemonById.back_default ?? ""} />
+               <Image height={600} width={600} quality={100} alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.findPokemonById.front_default ?? ""} />  
+                <Image height={600} width={600} quality={100} alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.findPokemonById.back_default ?? ""} />
                 {/* <Hellow/>
                 <Hellow/> */}
             </ImgWapper>

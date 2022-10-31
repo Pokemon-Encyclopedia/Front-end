@@ -5,19 +5,20 @@ import InputBox from '../components/inputBox'
 import PokectList from '../components/poketList'
 import { initPoketmonList, searchValueAtom } from '../Util/recoil/state'
 import { getPoketmonType } from '../types';
-import { useQuery } from '@apollo/client';
-import { GET_POKETLISTS } from '../gql'
+import { gql, useQuery } from '@apollo/client';
 import Phead from '../components/Phead'
+import { getPokemons } from '../gql'
 
-// const Home: NextPage<{data: getPoketmonType}> = ({data}) => {
-const Home: NextPage = () => {
-  
-  const searchValue = useRecoilState(searchValueAtom);
+const Home: NextPage = () => {  
 
-const { data , loading, error } = useQuery<getPoketmonType>(
-  GET_POKETLISTS,
+const { data , loading, error } = useQuery<getPoketmonType>(getPokemons,{
+    variables : {
+      limit:151,
+      offset:0,
+    }
+  }
 );
-console.log(data);
+
 if (loading) {return <h2>Loading...</h2>}
 if (error) {return <h1>에러 발생</h1>}
 
@@ -25,7 +26,7 @@ if (error) {return <h1>에러 발생</h1>}
     <>
       <Phead seoTitle="포켓몬 리스트페이지" />
         <InputBox />
-        <PokectList data={data} />
+        <PokectList data={data?.pokemons.results} />
     </>
   )
 }

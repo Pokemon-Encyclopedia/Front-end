@@ -1,6 +1,5 @@
 import { NextPage } from 'next';
 import styled from "@emotion/styled";
-import React, { useState } from "react"
 import { useRecoilState } from 'recoil';
 import { searchValueAtom } from '../../Util/recoil/state';
 
@@ -32,7 +31,6 @@ const InputWapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: EarlyFontDiary;
     border-radius: 10px;
     background-color: white;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -44,16 +42,5 @@ const InputWapper = styled.div`
         border: none;
     }
 `;
-
-// const SubmitBtn = styled.button`
-//     width: 50px;
-//     height: 50%;
-
-//     font-family: EarlyFontDiary;
-//     background-color: black;
-//     color: white;
-//     border-top-right-radius: 10px;
-//     border-bottom-right-radius: 10px;
-// `;
 
 export default InputBox;

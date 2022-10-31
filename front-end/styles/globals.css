@@ -1,7 +1,7 @@
 @font-face {
-  font-family: "EarlyFontDiary";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2")
-    format("woff2");
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -10,8 +10,14 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: EarlyFontDiary;
   background-color: #dcd2ea;
+}
+
+html,
+body,
+input,
+a {
+  font-family: S-CoreDream-3Light;
 }
 
 a {
