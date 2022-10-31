@@ -2,16 +2,46 @@ import { NextPage } from 'next';
 import styled from "@emotion/styled";
 import Pokect from './Pokect';
 import { getPoketmonType } from '../../types';
-import { useRecoilState } from 'recoil';
-import { searchValueAtom } from '../../Util/recoil/state';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { initPoketmonList, searchValueAtom } from '../../Util/recoil/state';
 import { pokectName } from '../../metadata/pokectName';
+import { GET_POKETLISTS } from '../../gql';
+import { useQuery } from '@apollo/client';
+import { useEffect } from 'react';
 
-const PokectList:NextPage<{data: getPoketmonType}> = ({data}) => {
+const PokectList:NextPage<{data: getPoketmonType | undefined}> = ({data}) => {
+// const PokectList:NextPage = () => {
+    // const setInitPoketmonList = useSetRecoilState(initPoketmonList);
     const searchValue = useRecoilState(searchValueAtom);
+        
+    // const { data , loading, error } = useQuery<getPoketmonType>(
+    //     GET_POKETLISTS,
+    //     searchValue 
+    //     ? {
+    //         variables: {
+    //         isAdult: false,
+    //         type: 'POKECT',
+    //         search: searchValue,
+    //         } 
+    //     }   
+    //     : {
+    //         variables: {
+    //         isAdult: false,
+    //         type: 'POKECT',
+    //         }
+    //     } 
+    // );    
+    // console.log(data);
+    // if (loading) {return <h2>Loading...</h2>}
+    // if (error) {return <h1>에러 발생</h1>}
 
-    const List = data?.findAll.map((i) => ({...i , pokectmonName : pokectName[i.id]}))      
-   const searchDataList = List && List.filter((data) => data.pokectmonName.toLowerCase().includes(searchValue[0].toLocaleString()))
+    const List = data?.findAll.map((i) => ({...i , pokectmonName : pokectName[i.id]}))  
+    let searchDataList = List && List.filter((data) => data.pokectmonName.toLowerCase().includes(searchValue[0].toLocaleString()))
     console.log(searchDataList);
+
+    useEffect(() => {
+        
+    },[])
     
 
     return (

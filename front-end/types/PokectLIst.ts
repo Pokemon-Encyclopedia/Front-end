@@ -9,3 +9,8 @@ export interface PokectmonListType{
 export interface getPoketmonType {
     findAll :PokectmonListType[]
   }
+
+  
+export interface getPoketmonIdType {
+    findPokemonById :PokectmonListType
+  }
