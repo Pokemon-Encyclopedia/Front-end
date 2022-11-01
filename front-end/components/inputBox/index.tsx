@@ -33,8 +33,8 @@ const InputWapper = styled.div`
     justify-content: center;
     border-radius: 10px;
     background-color: white;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    input{
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+     input{
         width: 90%;
         height: 70%;
         font-size: 20px;

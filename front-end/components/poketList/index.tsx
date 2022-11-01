@@ -18,9 +18,9 @@ const PokectList:NextPage<{data: PokectmonListType[] | undefined}> = ({data}) =>
     return (
         <PoketListWapper>
          {AddKoreanNameList && filterPoketList && searchValue ? filterPoketList?.map(i => (
-          <Pokect key={i.id} id={i.id} name={i.pokectmonName} image={i.image}  />
+          <Pokect key={i.id} id={i.id} Kname={i.pokectmonName} name={i.name} image={i.image}  />
         )) : AddKoreanNameList?.map(i => (
-            <Pokect key={i.id} id={i.id} name={i.pokectmonName} image={i.image}
+            <Pokect key={i.id} id={i.id} Kname={i.pokectmonName} name={i.name} image={i.image}
             />
           ))}
         </PoketListWapper>
@@ -35,7 +35,7 @@ const PoketListWapper = styled.div`
 
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 2rem;
 `;
 
 export default PokectList;

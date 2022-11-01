@@ -5,28 +5,27 @@ import styled from "@emotion/styled";
 import { PokectmonListType } from '../../types';
 import { useCallback } from 'react';
 
-const Pokect:NextPage<PokectmonListType> = ({id, name, image}) => {
+const Pokect:NextPage<PokectmonListType> = ({id, Kname, name, image}) => {
     const router = useRouter();
-
     const handleClickCard = useCallback(
-        (id: number) => {
-          router.push(`item/${id}`);
+        (Ename: string) => {
+          router.push(`${Ename}`);
         },
         [router],
       );
 
     return (
-         <PoketWapper onClick={() => handleClickCard(id)}>
-            { image && <Image height={200} width={`100%`} quality={100} alt={"포켓몬 캐릭터"} objectFit={'cover'} src={image} /> }
+         <PoketWapper onClick={() => handleClickCard(name)}>
+            { image && <Image height={300} width={`100%`} quality={100} alt={"포켓몬 캐릭터"} objectFit={'cover'} src={image} /> }
              <Number>{`No.${id}`}</Number>
-             <Name>{name}</Name>
+             <Name>{Kname}</Name>
          </PoketWapper>
     )
 }
 
 const PoketWapper = styled.div`
     width: 270px;
-    height: 300px;
+    height: 320px;
     
     display: flex;
     flex-direction: column;
@@ -35,15 +34,19 @@ const PoketWapper = styled.div`
     background-color: white;
     border-radius: 5px;
     cursor: pointer;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        :hover {
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+            transition: 0.2s ease;
+            transform: scale(1.02);
+        }
 `;
 
 const Number = styled.p`
     width: 100%;
     height: 20px;
     
-    font-size: 10px;
+    font-size: 12px;
     color: darkgray;
 `;
 const Name = styled.div`

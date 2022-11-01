@@ -1,6 +1,6 @@
 export const PokemonTypesData = [
         {
-                usValue:"GLASS",
+                usValue:"GRASS",
                 value:"풀",
                 color:"#A7DB8D",
         },
