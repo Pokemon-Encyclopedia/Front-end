@@ -1,17 +1,16 @@
-import type { GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+/* eslint-disable jsx-a11y/alt-text */
+import type { NextPage } from 'next'
 import InputBox from '../components/inputBox'
 import PokectList from '../components/poketList'
-import { initPoketmonList, searchValueAtom } from '../Util/recoil/state'
 import { getPoketmonType } from '../types';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import Phead from '../components/Phead'
 import { getPokemons } from '../gql'
+import Loading from '../components/loading';
 
 const Home: NextPage = () => {  
 
-const { data , loading, error } = useQuery<getPoketmonType>(getPokemons,{
+const { data , loading } = useQuery<getPoketmonType>(getPokemons,{
     variables : {
       limit:251,
       offset:0,
@@ -19,8 +18,7 @@ const { data , loading, error } = useQuery<getPoketmonType>(getPokemons,{
   }
 );
 
-if (loading) {return <h2>Loading...</h2>}
-if (error) {return <h1>에러 발생</h1>}
+if (loading) {return <Loading />}
 
   return (
     <>
