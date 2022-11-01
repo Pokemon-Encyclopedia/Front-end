@@ -12,52 +12,57 @@ import { useParams } from "react-router-dom";
 import { useRouter } from 'next/router';
 import { pokectName } from '../metadata/pokectName';
 
-
-
 // const PokectDetail:NextPage<{data:PokectmonListType}> = ({data}) => {
 const PokectDetail:NextPage = () => {
     const router = useRouter();
-    console.log(router.query.name);
-    
-    
+    let Pokemontypes;
     const { data , loading, error } = useQuery<getPoketmonIdType>(
         getPokemon,{
             variables: {
                 name: router.query.name,
             },
         }
-    );    
+    );
+    console.log(data);
+    console.log(data?.pokemon.types);
     if (loading) {return <h2>Loading...</h2>}
     if (error) {return <h1>에러 발생</h1>}
-
-    
-
-    const PoketmonName = pokectName[ data?.pokemon.id ?? 0] ;
-
-    const Pokemontypes:any = PokemonTypesData.filter((i) =>  i.usValue === data?.pokemon.types[0].type.name.toUpperCase() ||  i.usValue === data?.pokemon.types[1] ? data?.pokemon.types[1].type.name.toUpperCase() : "")
-    console.log(Pokemontypes);
-    
-        
+    const PoketmonName = pokectName[ data?.pokemon.id ?? 0];
+    if(data?.pokemon.types[1]){
+        Pokemontypes = PokemonTypesData.filter((i) =>  i.usValue === data?.pokemon.types[0].type.name.toUpperCase() ||  i.usValue === data?.pokemon.types[1].type.name.toUpperCase())    
+    }else{
+        Pokemontypes = PokemonTypesData.filter((i) =>  i.usValue === data?.pokemon.types[0].type.name.toUpperCase())    
+    }
     return (
         <>
         <Layout seoTitle={"포켓몬 상세페이지"} />
             <PoketListWapper>
             <ImgWapper>
-               <Image height={300} width={300} quality={100} alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.pokemon.sprites.front_default ?? ""} />  
-                <Image height={300} width={300} quality={100} alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.pokemon.sprites.back_default ?? ""} />
+               <Image height={280} width={280} quality={100} alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.pokemon.sprites.front_default ?? ""} />  
+                <Image height={280} width={280} quality={100} alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.pokemon.sprites.back_default ?? ""} />
             </ImgWapper>
             <ContentWapper>
-                <Number>{`No.${data?.pokemon.id}`}</Number>
+                <Main>
                 <Name>{PoketmonName}</Name>
+                <Number>{`No.${data?.pokemon.id}`}</Number>
+                </Main>
+
+               <Detail>
                 <TypesWapper>
                 { Pokemontypes.map((i:PokectmontypeType , index:number) => <TypesBox key={index} style={{backgroundColor:`${i.color}`}} >{i.value}</TypesBox> )}
                 </TypesWapper>
+
+                <DetailBox>
+                    <Height>{`키: ${data?.pokemon.height ? data?.pokemon.height/10 : "없음"}m`}</Height>
+                    <Weight>{`몸무게 : ${data?.pokemon.weight ? data?.pokemon.weight/10 : "없음" }kg`}</Weight>
+                    <Order>{`나이 : ${data?.pokemon.order}살`}</Order>
+                </DetailBox>
+               </Detail>
             </ContentWapper>
             </PoketListWapper>
         </>
     )
 }
-
 // export const getStaticPaths:GetStaticPaths = () => {
 //     // const InitPoketmonList = useRecoilValue(initPoketmonList);
 //     // const ids =  InitPoketmonList.map((poket) => {
@@ -92,8 +97,6 @@ const PokectDetail:NextPage = () => {
 //         },
 //     };
 // };
-
-
 const PoketListWapper = styled.div`
     width: 100%;
     height: 100vh;
@@ -105,7 +108,7 @@ const PoketListWapper = styled.div`
     
 `;
 const ImgWapper = styled.div`
-    width: 40%;
+    width: 30%;
     height: 250px;
 
     display: flex;
@@ -125,23 +128,27 @@ const ContentWapper = styled.div`
     padding-bottom: 60px;
     background-color: white;
 `;
+const Main = styled.div`
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+`;
 const Number = styled.span`
-    font-size: 20px;
+padding-bottom: 7px;
+    font-size: 15px;
     color: gray;
 `;
 const Name = styled.div`
     font-size: 40px;
     font-weight: bold;
 `;
-
 const TypesWapper = styled.div`
     width: 100%;
-    height: 30px;
+    height: 70px;
 
     display: flex;
     justify-content: center;
 `;
-
 const TypesBox = styled.div`
     width: 170px;
     height: 40px;
@@ -155,7 +162,30 @@ const TypesBox = styled.div`
     border-radius: 5px;
     color: white;
     font-size: 25px;
-    
+`;
+const Detail = styled.div`
+    width: 500px;
+    height: 400px;
+
+`;
+const DetailBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding-left: 80px;
+    gap: 50px;
+
+`;
+const Height = styled.span`
+    width: 50%;
+    font-size: 20px;
+`;
+const Weight = styled.span`
+    font-size: 20px;
+    width: 50%;
+`;
+const Order = styled.span`
+    font-size: 20px;
+    width: 50%;
 `;
 
 export default PokectDetail;

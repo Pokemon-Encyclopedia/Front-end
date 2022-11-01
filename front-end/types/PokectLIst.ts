@@ -9,8 +9,13 @@ export interface getPoketmonType {
   pokemons : {
     results :PokectmonListType[]
   }
-  }
+}
 
+export interface Ptype {
+  type : {
+    name: string,
+  },
+}
 
 export interface PoketmonType {
   id:number,
@@ -22,13 +27,19 @@ export interface PoketmonType {
     back_default:string,
     front_default:string,
   }
-  types: [
-    type : {
-      type:{
-        name:string,
+  types : {
+    0 : {
+      type : {
+        name : string,
       }
-    },
-  ],
+    }
+    1 : {
+      type : {
+        name : string,
+      }
+    }
+
+  },
 }
 
 export interface getPoketmonIdType {
