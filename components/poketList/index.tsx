@@ -28,7 +28,7 @@ const PokectList:NextPage<{data: PokectmonListType[] | undefined}> = ({data}) =>
 const PoketListWapper = styled.div`
     width: 100%;
     height: 100%;
-    padding: 10px 27px 0px 3.2vw;
+    padding: 10px 27px 30px 3.2vw;
 
     display: flex;
     justify-content: flex-start;

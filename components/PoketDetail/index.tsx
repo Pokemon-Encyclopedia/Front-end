@@ -16,10 +16,14 @@ const PokectDetail:NextPage<{data:getPoketmonIdType}> = ({data}) => {
     return (
         <>
             <PoketListWapper>
+            <ImgWappers>
             <ImgWapper>
-               <Image height={280} width={280} quality={100} alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.pokemon.sprites.front_default ?? ""} />  
-                <Image height={280} width={280} quality={100} alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.pokemon.sprites.back_default ?? ""} />
+               <Image quality={100} layout="fill" alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.pokemon.sprites.front_default ?? ""} />  
             </ImgWapper>
+            <ImgWapper>
+                <Image quality={100} layout="fill" alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.pokemon.sprites.back_default ?? ""} />
+            </ImgWapper>
+            </ImgWappers>
             <ContentWapper>
                 <Main>
                 <Name>{PoketmonName}</Name>
@@ -53,14 +57,22 @@ const PoketListWapper = styled.div`
     padding-top: 50px;
     
 `;
-const ImgWapper = styled.div`
-    width: 30%;
-    height: 250px;
-
+const ImgWappers = styled.div`
+    width: 25%;
+    height: 330px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 `;
+const ImgWapper = styled.div`
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
 const ContentWapper = styled.div`
     width: 100%;
     height: 900px;

@@ -16,7 +16,7 @@ const Pokect:NextPage<PokectmonListType> = ({id, Kname, name, image}) => {
 
     return (
          <PoketWapper onClick={() => handleClickCard(name)}>
-            { image && <Image height={300} width={`100%`} quality={100} alt={"포켓몬 캐릭터"} objectFit={'cover'} src={image} /> }
+            { image && <Image height={300} width={90} quality={100} alt={"포켓몬 캐릭터"} objectFit={'cover'} src={image} /> }
              <Number>{`No.${id}`}</Number>
              <Name>{Kname}</Name>
          </PoketWapper>
@@ -25,7 +25,7 @@ const Pokect:NextPage<PokectmonListType> = ({id, Kname, name, image}) => {
 
 const PoketWapper = styled.div`
     width: 270px;
-    height: 320px;
+    height: 350px;
     
     display: flex;
     flex-direction: column;
