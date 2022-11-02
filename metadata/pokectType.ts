@@ -76,6 +76,24 @@ export const PokemonTypesData = [
 
                 usValue: "DRAGON",
                 value:"드레곤",
-                color:"A27DFA",
-            }, 
+                color:"#A27DFA",
+        }, 
+        {
+
+                usValue: "DARK",
+                value:"악",
+                color:"#A29288",
+        },
+        {
+
+                usValue: "FAIRY",
+                value:"페어리",
+                color:"#F4BDC9",
+        },
+        {
+
+                usValue: "STEEL",
+                value:"강철",
+                color:"#D1D1E0",
+        }, 
 ]   
