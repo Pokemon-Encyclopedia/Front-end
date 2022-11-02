@@ -34,6 +34,11 @@ const PoketListWapper = styled.div`
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 1.5rem;
+    @media (max-width: 768px) {
+    width: 500px;
+    padding: 10px;
+    margin: 0 auto;
+  }
 `;
 
 export default PokectList;

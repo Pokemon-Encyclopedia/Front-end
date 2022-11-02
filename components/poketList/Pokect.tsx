@@ -28,8 +28,9 @@ const PoketWapper = styled.div`
     height: 350px;
     
     display: flex;
+    justify-content: flex-start;
     flex-direction: column;
-    
+
     padding: 10px 10px;
     background-color: white;
     border-radius: 5px;
@@ -40,6 +41,12 @@ const PoketWapper = styled.div`
             transition: 0.2s ease;
             transform: scale(1.02);
         }
+    
+    @media (max-width: 768px) {
+    width: 210px;
+    height: 280px;
+    margin: 0 auto;
+  }
 `;
 
 const Number = styled.p`

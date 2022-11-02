@@ -38,7 +38,7 @@ const PokectDetail:NextPage<{data:getPoketmonIdType}> = ({data}) => {
                 <DetailBox>
                     <Height>{`키: ${data?.pokemon.height ? data?.pokemon.height/10 : "없음"}m`}</Height>
                     <Weight>{`몸무게 : ${data?.pokemon.weight ? data?.pokemon.weight/10 : "없음" }kg`}</Weight>
-                    <Order>{`나이 : ${data?.pokemon.order}살`}</Order>
+                    {/* <Order>{`나이 : ${data?.pokemon.order}살`}</Order> */}
                 </DetailBox>
                </Detail>
             </ContentWapper>
@@ -55,6 +55,11 @@ const PoketListWapper = styled.div`
     flex-direction: column;
     align-items: center;
     padding-top: 50px;
+
+    @media (max-width: 768px) {
+    width: 500px;
+    height: 100%;
+    }
     
 `;
 const ImgWappers = styled.div`
@@ -63,6 +68,9 @@ const ImgWappers = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 768px) {
+    width: 400px;
+    }
 `;
 const ImgWapper = styled.div`
     position: relative;
@@ -92,13 +100,19 @@ const Main = styled.div`
     gap: 5px;
 `;
 const Number = styled.span`
-padding-bottom: 7px;
+    padding-bottom: 7px;
     font-size: 15px;
     color: gray;
+    @media (max-width: 768px) {
+        font-size: 10px;
+    }
 `;
 const Name = styled.div`
     font-size: 40px;
     font-weight: bold;
+    @media (max-width: 768px) {
+        font-size: 35px;
+    }
 `;
 const TypesWapper = styled.div`
     width: 100%;
@@ -120,6 +134,11 @@ const TypesBox = styled.div`
     border-radius: 5px;
     color: white;
     font-size: 25px;
+    @media (max-width: 768px) {
+        width: 130px;
+        height: 27px;
+        font-size: 20px;
+    }
 `;
 const Detail = styled.div`
     width: 500px;
@@ -136,14 +155,23 @@ const DetailBox = styled.div`
 const Height = styled.span`
     width: 50%;
     font-size: 20px;
+    @media (max-width: 768px) {
+        font-size: 15px;
+    }
 `;
 const Weight = styled.span`
     font-size: 20px;
     width: 50%;
+    @media (max-width: 768px) {
+        font-size: 15px;
+    }
 `;
 const Order = styled.span`
     font-size: 20px;
     width: 50%;
+    @media (max-width: 768px) {
+        font-size: 15px;
+    }
 `;
 
 export default PokectDetail;
