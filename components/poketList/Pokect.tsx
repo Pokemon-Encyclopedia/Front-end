@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from 'next/router';
 import styled from "@emotion/styled";
 import { PokectmonListType } from '../../types';
-import { useCallback } from 'react';
+import React,{ useCallback } from 'react';
 
 const Pokect:NextPage<PokectmonListType> = ({id, Kname, name, image}) => {
     const router = useRouter();
@@ -67,4 +67,4 @@ const Name = styled.div`
     font-size: 22px;
 `;
 
-export default Pokect;
+export default React.memo(Pokect);

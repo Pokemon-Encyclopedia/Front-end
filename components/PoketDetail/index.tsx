@@ -18,10 +18,10 @@ const PokectDetail:NextPage<{data:getPoketmonIdType}> = ({data}) => {
             <PoketListWapper>
             <ImgWappers>
             <ImgWapper>
-               <Image quality={100} layout="fill" alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.pokemon.sprites.front_default ?? ""} />  
+               <Image quality={100} width={330}  height={330} layout="fill" alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.pokemon.sprites.front_default ?? ""} />  
             </ImgWapper>
             <ImgWapper>
-                <Image quality={100} layout="fill" alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.pokemon.sprites.back_default ?? ""} />
+                <Image quality={100} width={330} height={330} layout="fill" alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.pokemon.sprites.back_default ?? ""} />
             </ImgWapper>
             </ImgWappers>
             <ContentWapper>

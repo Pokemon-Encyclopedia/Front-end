@@ -1,0 +1,10 @@
+{
+"theme_color" : "#ffffff",
+"background_color" : "#ffffff",
+"display" : "standalone",
+"scope" : "/",
+"start_url" : "/",
+"name" : "pokemon-front",
+"short_name" : "poke",
+"description" : "포켓몬 사이트를 pwa 웹사이트로 만들어보기"
+}
