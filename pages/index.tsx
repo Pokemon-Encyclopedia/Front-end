@@ -7,6 +7,7 @@ import { useQuery } from '@apollo/client';
 import Phead from '../components/Phead'
 import { getPokemons } from '../gql'
 import Loading from '../components/loading';
+import React from 'react';
 
 const Home: NextPage = () => {  
 
@@ -29,16 +30,4 @@ if (loading) {return <Loading />}
   )
 }
 
-// export const getStaticProps:GetStaticProps = () => {  
-//   const { data , loading, error } = useQuery<getPoketmonType>(GET_POKETLISTS);
-//   console.log(data);
-//   // if (loading) {return <h2>Loading...</h2>}
-//   // if (error) {return <h1>에러 발생</h1>}
-//   return {
-//       props: {
-//           data:data
-//       }
-//   }
-// }
-
-export default Home
+export default React.memo(Home);

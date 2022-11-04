@@ -15,7 +15,7 @@ const InputBox:NextPage = () => {
 }
 
 const InputBoxWapper = styled.div`
-    width: 500px;
+    width: 100%;
     height: 100px;
 
     display: flex;
@@ -40,6 +40,14 @@ const InputWapper = styled.div`
         font-size: 20px;
         outline: none;
         border: none;
+    }
+    @media (max-width: 768px) {
+    width: 270px;
+    height: 40%;
+    input{
+        width: 80%;
+        font-size: 14px;
+    }
     }
 `;
 

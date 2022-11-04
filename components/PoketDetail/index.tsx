@@ -38,7 +38,6 @@ const PokectDetail:NextPage<{data:getPoketmonIdType}> = ({data}) => {
                 <DetailBox>
                     <Height>{`키: ${data?.pokemon.height ? data?.pokemon.height/10 : "없음"}m`}</Height>
                     <Weight>{`몸무게 : ${data?.pokemon.weight ? data?.pokemon.weight/10 : "없음" }kg`}</Weight>
-                    {/* <Order>{`나이 : ${data?.pokemon.order}살`}</Order> */}
                 </DetailBox>
                </Detail>
             </ContentWapper>
@@ -160,13 +159,6 @@ const Height = styled.span`
     }
 `;
 const Weight = styled.span`
-    font-size: 20px;
-    width: 50%;
-    @media (max-width: 768px) {
-        font-size: 15px;
-    }
-`;
-const Order = styled.span`
     font-size: 20px;
     width: 50%;
     @media (max-width: 768px) {

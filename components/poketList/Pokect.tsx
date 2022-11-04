@@ -43,8 +43,8 @@ const PoketWapper = styled.div`
         }
     
     @media (max-width: 768px) {
-    width: 210px;
-    height: 280px;
+    width: 150px;
+    height: 200px;
     margin: 0 auto;
   }
 `;
@@ -55,6 +55,9 @@ const Number = styled.p`
     
     font-size: 12px;
     color: darkgray;
+    @media (max-width: 768px) {
+    font-size: 6px;
+  }
 `;
 const Name = styled.div`
     width: 100%;
@@ -65,6 +68,9 @@ const Name = styled.div`
     
     font-weight: bold;
     font-size: 22px;
+    @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 export default React.memo(Pokect);

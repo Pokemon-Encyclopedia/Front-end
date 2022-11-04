@@ -35,7 +35,7 @@ const PoketListWapper = styled.div`
     flex-wrap: wrap;
     gap: 1.5rem;
     @media (max-width: 768px) {
-    width: 500px;
+    width: 100%;
     padding: 10px;
     margin: 0 auto;
   }
