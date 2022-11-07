@@ -94,8 +94,8 @@ const Button = styled.button`
       top: 40px;
       right: 15px;
     div{
-      width: 15px;
-      height: 15px;
+      width: 20px;
+      height: 20px;
       opacity: 0.6;
     }
     }
