@@ -1,21 +1,24 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { installClickedState } from "../../Util/recoil/state";
 
 const DownLoadBtn = () => {
-    const router = useRouter();
     const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
     const [isStandalone, setIsStandalone] = useState<boolean>(false);
-    const [installClicked, setInstallClicked] = useState<boolean>(false);
+    const [installClicked, setInstallClicked] = useRecoilState<boolean>(installClickedState);
+    const router = useRouter();
 
     
     useEffect(() => {
-        const standalone = window.matchMedia("(display-mode: standalone)").matches;
-    
+        const standalone = window.matchMedia("display-mode: standalone").matches;
+        
         if (standalone) {
           setIsStandalone(true);
         }
       }, []);
+
 
       useEffect(() => {
         const beforeinstallpomptListner = (e: any) => {
@@ -24,7 +27,7 @@ const DownLoadBtn = () => {
         };
     
         window.addEventListener("beforeinstallprompt", beforeinstallpomptListner);
-    
+        
         return () => {
           window.removeEventListener(
             "beforeinstallprompt",
@@ -40,6 +43,7 @@ const DownLoadBtn = () => {
         setInstallClicked(true);
 
         if (!deferredPrompt) {
+        router.push("/install");
         return;
         }
 
@@ -51,8 +55,7 @@ const DownLoadBtn = () => {
 
     return (
         <>
-              {!isStandalone && !installClicked && (
-
+        {!isStandalone && !installClicked && (
         <button
           onClick={onInstallClick}
           style={{
@@ -60,6 +63,8 @@ const DownLoadBtn = () => {
             top: "30px",
             right: "30px",
             borderRadius: "5px",
+            cursor:"pointer",
+            border:"none",
           }}
         >
           <div style={{ width: "30px", height: "30px", opacity: 0.6 }}>
@@ -74,7 +79,6 @@ const DownLoadBtn = () => {
           </div>
         </button>
         )}
-
         </>
     )
 }

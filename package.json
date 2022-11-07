@@ -22,7 +22,8 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.38.0",
     "react-router-dom": "^6.4.2",
-    "recoil": "^0.7.6"
+    "recoil": "^0.7.6",
+    "sess": "^0.1.4"
   },
   "devDependencies": {
     "@emotion/babel-preset-css-prop": "^11.10.0",
