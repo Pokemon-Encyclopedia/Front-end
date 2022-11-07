@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { installClickedState } from "../../Util/recoil/state";
+import styled from "@emotion/styled";
 
 const DownLoadBtn = () => {
     const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
@@ -56,18 +57,10 @@ const DownLoadBtn = () => {
     return (
         <>
         {!isStandalone && !installClicked && (
-        <button
+        <Button
           onClick={onInstallClick}
-          style={{
-            position: "fixed",
-            top: "30px",
-            right: "30px",
-            borderRadius: "5px",
-            cursor:"pointer",
-            border:"none",
-          }}
         >
-          <div style={{ width: "30px", height: "30px", opacity: 0.6 }}>
+          <div>
           <Image
               src="/download-solid.svg"
               width={10}
@@ -77,10 +70,35 @@ const DownLoadBtn = () => {
               alt="앱 설치"
             />
           </div>
-        </button>
+        </Button>
         )}
         </>
     )
 }
+
+const Button = styled.button`
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    border-radius: 5px;
+    cursor:pointer;
+    border:none;
+
+    div{
+      width: 30px;
+      height: 30px;
+      opacity: 0.6;
+    }
+
+    @media (max-width: 768px) {
+      top: 40px;
+      right: 15px;
+    div{
+      width: 15px;
+      height: 15px;
+      opacity: 0.6;
+    }
+    }
+`;
 
 export default DownLoadBtn;
