@@ -13,7 +13,7 @@ const Home: NextPage = () => {
 
 const { data , loading } = useQuery<getPoketmonType>(getPokemons,{
     variables : {
-      limit:251,
+      limit:386,
       offset:0,
     }
   }
