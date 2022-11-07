@@ -8,9 +8,9 @@ import Phead from '../components/Phead'
 import { getPokemons } from '../gql'
 import Loading from '../components/loading';
 import React from 'react';
+import DownLoadBtn from '../components/DownLoadBtn';
 
 const Home: NextPage = () => {  
-
 const { data , loading } = useQuery<getPoketmonType>(getPokemons,{
     variables : {
       limit:386,
@@ -23,7 +23,8 @@ if (loading) {return <Loading />}
 
   return (
     <>
-      <Phead seoTitle="포켓몬 리스트페이지" />
+      <DownLoadBtn />
+      <Phead seoTitle="리스트페이지" />
         <InputBox />
         <PokectList data={data?.pokemons.results} />
     </>

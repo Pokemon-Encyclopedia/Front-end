@@ -19,7 +19,7 @@ const PokectDetailPage:NextPage = () => {
     if (loading) {return <Loading />}
     return (
         <>
-        <Layout seoTitle={"포켓몬 상세페이지"} />
+        <Layout seoTitle={"상세페이지"} />
             <PokectDetail data={data} />
         </>
     )

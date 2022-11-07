@@ -10,8 +10,8 @@ const Phead: NextPage<LayoutProps> = ({seoTitle}) => {
   return (
         <div>
           <Head>
-            <title>{seoTitle} | Poketmon-Encyclopedia</title>
-          </Head>   
+            <title>포켓몬 | {seoTitle}</title>
+          </Head>
         </div>
     )
 }
