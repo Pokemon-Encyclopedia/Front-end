@@ -13,7 +13,7 @@ import DownLoadBtn from '../components/DownLoadBtn';
 const Home: NextPage = () => {
 const { data , loading } = useQuery<getPoketmonType>(getPokemons,{
     variables : {
-      limit:386,
+      limit:649,
       offset:0,
     }
   }
