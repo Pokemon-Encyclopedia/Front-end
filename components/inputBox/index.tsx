@@ -34,8 +34,35 @@ const PokemonSelect = styled.select`
     font-size: 15px;
     font-family: S-CoreDream-3Light;
     padding-left: 20px;
-    border-radius: 10px;
+    border-radius: 8px;
     background-color: white;
+
+    -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: all 0.2s ease-in-out;
+
+  :hover {
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    }
+
+    :focus {
+    border-color: #aaa;
+    box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.7);
+    box-shadow: 0 0 0 3px -moz-mac-focusring;
+    color: #222;
+    outline: none;
+    }
+
+    :disabled {
+    opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+    width: 200px;
+    height: 30%;
+    font-size: 12px;
+    }
 `;
 
 const InputBoxWapper = styled.div`
@@ -47,6 +74,20 @@ const InputBoxWapper = styled.div`
     align-items: center;
     margin: 0 auto;
     gap: 200px;
+
+    @media (max-width: 768px) {
+    height: 130px;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto;
+
+    gap: 20px;
+}
+
+
 `;
 
 const InputWapper = styled.div`
