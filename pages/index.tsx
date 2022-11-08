@@ -10,7 +10,7 @@ import Loading from '../components/loading';
 import React from 'react';
 import DownLoadBtn from '../components/DownLoadBtn';
 
-const Home: NextPage = () => {  
+const Home: NextPage = () => {
 const { data , loading } = useQuery<getPoketmonType>(getPokemons,{
     variables : {
       limit:386,
@@ -18,7 +18,6 @@ const { data , loading } = useQuery<getPoketmonType>(getPokemons,{
     }
   }
 );
-
 if (loading) {return <Loading />}
 
   return (

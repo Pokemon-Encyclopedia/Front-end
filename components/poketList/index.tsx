@@ -5,13 +5,15 @@ import { PokectmonListType } from '../../types';
 import { useRecoilState } from 'recoil';
 import { searchValueAtom } from '../../Util/recoil/state';
 import { pokectName } from '../../metadata/pokectName';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const PokectList:NextPage<{data: PokectmonListType[] | undefined}> = ({data}) => {
     const searchValue = useRecoilState(searchValueAtom);
-    
-    const AddKoreanNameList = data?.map((i) => ({...i , pokectmonName : pokectName[i.id]} ))  
-    const filterPoketList = AddKoreanNameList?.filter((data) => data.pokectmonName.includes(searchValue[0].toLocaleString()))
-
+    const [AddKoreanNameList , setAddKoreanNameList] = useState([]);
+    useEffect(() =>{
+      setAddKoreanNameList(data?.map((i) => ({...i , pokectmonName : pokectName[i.id]} )));
+    },[])
+    const filterPoketList = useMemo(() => {return AddKoreanNameList?.filter((data) => data.pokectmonName.includes(searchValue[0].toLocaleString()))},[searchValue]);
 
     return (
         <PoketListWapper>
