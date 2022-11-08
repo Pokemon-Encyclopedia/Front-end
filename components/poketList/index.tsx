@@ -1,27 +1,44 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { NextPage } from 'next';
 import styled from "@emotion/styled";
 import Pokect from './Pokect';
 import { PokectmonListType } from '../../types';
-import { useRecoilState } from 'recoil';
-import { searchValueAtom } from '../../Util/recoil/state';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { PokeListSortAtom, searchValueAtom } from '../../Util/recoil/state';
 import { pokectName } from '../../metadata/pokectName';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const PokectList:NextPage<{data: PokectmonListType[] | undefined}> = ({data}) => {
     const searchValue = useRecoilState(searchValueAtom);
     const [AddKoreanNameList , setAddKoreanNameList] = useState([]);
+    const setSortValue = useRecoilValue(PokeListSortAtom);
+    let SortPoketList;
+
     useEffect(() =>{
       setAddKoreanNameList(data?.map((i) => ({...i , pokectmonName : pokectName[i.id]} )));
     },[])
     const filterPoketList = useMemo(() => {return AddKoreanNameList?.filter((data) => data.pokectmonName.includes(searchValue[0].toLocaleString()))},[searchValue]);
+    switch(setSortValue){
+      case "도감번호순서" :
+        SortPoketList = AddKoreanNameList.sort((a,b) => a.id - b.id); break;
+      case "도감번호반대순서" :
+        SortPoketList = AddKoreanNameList.sort((a,b) => b.id - a.id); break;
+      case "가나다순서" :
+        SortPoketList = AddKoreanNameList.sort((a,b) => b.pokectmonName > a.pokectmonName ? -1 : 1); break;
+      case "가나다역순서" :
+        SortPoketList = AddKoreanNameList.sort((a,b) => b.pokectmonName < a.pokectmonName ? -1 : 1); break;
+      default :
+        SortPoketList = AddKoreanNameList.sort((a,b) => a.id - b.id); break;
+    }        
+
 
     return (
         <PoketListWapper>
          {AddKoreanNameList && filterPoketList && searchValue ? filterPoketList?.map(i => (
-          <Pokect key={i.id} id={i.id} Kname={i.pokectmonName} name={i.name} image={i.image}  />
-        )) : AddKoreanNameList?.map(i => (
-            <Pokect key={i.id} id={i.id} Kname={i.pokectmonName} name={i.name} image={i.image}
-            />
+          <Pokect key={i.id} id={i.id} Kname={i.pokectmonName} name={i.name} image={i.image} />
+          )) : 
+          AddKoreanNameList?.map(i => (
+          <Pokect key={i.id} id={i.id} Kname={i.pokectmonName} name={i.name} image={i.image} />
           ))}
         </PoketListWapper>
     )

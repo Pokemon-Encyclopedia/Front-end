@@ -15,14 +15,10 @@ const InputBox:NextPage = () => {
             </InputWapper>
 
             <PokemonSelect onChange={(e) => setSortValue(e.target.value)}>
-                <option value={"도감번호 순서"}>도감번호 순서</option>
+                <option value={"도감번호순서"}>도감번호 순서</option>
                 <option value={"도감번호반대순서"}>도감번호 반대 순서</option>
-                <option value={"키큰순서"}>키큰 순서</option>
-                <option value={"키작은순서"}>키작은 순서</option>
-                <option value={"무거운순서"}>무거운 순서</option>
-                <option value={"가벼운순서"}>가벼운 순서</option>
-                <option value={"가나다순"}>가나다순</option>
-                <option value={"가나다역순"}>가나다역순</option>
+                <option value={"가나다순서"}>가나다 순서</option>
+                <option value={"가나다역순서"}>가나다 역순서</option>
             </PokemonSelect>
         </InputBoxWapper>
     )
