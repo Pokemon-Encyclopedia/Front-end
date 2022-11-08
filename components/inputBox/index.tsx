@@ -1,39 +1,45 @@
 import { NextPage } from 'next';
 import styled from "@emotion/styled";
-import { useRecoilState } from 'recoil';
-import { searchValueAtom } from '../../Util/recoil/state';
-import { useCallback, useState } from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { PokeListSortAtom, searchValueAtom } from '../../Util/recoil/state';
 
 const InputBox:NextPage = () => {
     const [value , setValue] = useRecoilState(searchValueAtom);
-    const [selectValue , SetSelectValue] = useState("");
+    const setSortValue = useSetRecoilState(PokeListSortAtom);
 
-    const onChange = useCallback((e:any) => {
-        setValue(e.target.value)
-    },[setValue]) 
-
-    console.log(selectValue);
     return (
         <InputBoxWapper>
             <InputWapper>
-            <input placeholder='포켓몬이름을 입력하세요'  onChange={onChange} value={value}/>
+            <input placeholder='포켓몬이름을 입력하세요'  onChange={(e) =>  setValue(e.target.value)} value={value}/>
             <XBtn onClick={() => setValue("")} style={{visibility:`${value ? "visible" : "hidden"}`}}>❌</XBtn>
             </InputWapper>
 
-            <PokemonSelect onChange={(e) => SetSelectValue(e.target.value)}>
-                <option value={0}>도감번호 순서</option>
+            <PokemonSelect onChange={(e) => setSortValue(e.target.value)}>
+                <option value={"도감번호 순서"}>도감번호 순서</option>
                 <option value={"도감번호반대순서"}>도감번호 반대 순서</option>
                 <option value={"키큰순서"}>키큰 순서</option>
                 <option value={"키작은순서"}>키작은 순서</option>
                 <option value={"무거운순서"}>무거운 순서</option>
                 <option value={"가벼운순서"}>가벼운 순서</option>
+                <option value={"가나다순"}>가나다순</option>
+                <option value={"가나다역순"}>가나다역순</option>
             </PokemonSelect>
         </InputBoxWapper>
     )
 }
 
 const PokemonSelect = styled.select`
+     width: 350px;
+     height: 50%;
 
+    cursor: pointer;
+    border: none;
+    outline:none;
+    font-size: 15px;
+    font-family: S-CoreDream-3Light;
+    padding-left: 20px;
+    border-radius: 10px;
+    background-color: white;
 `;
 
 const InputBoxWapper = styled.div`
