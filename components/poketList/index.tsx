@@ -17,9 +17,11 @@ const PokectList:NextPage<{data: PokectmonListType[] | undefined}> = ({data}) =>
     useEffect(() =>{
       setAddKoreanNameList(data?.map((i) => ({...i , pokectmonName : pokectName[i.id]} )));
     },[])
+
     const filterPoketList = useMemo(() => {return AddKoreanNameList?.filter((data) => data.pokectmonName.includes(searchValue[0].toLocaleString()))},[searchValue]);
-    switch(setSortValue){
-      case "도감번호순서" :
+    useMemo(() => {
+      switch(setSortValue){
+        case "도감번호순서" :
         SortPoketList = AddKoreanNameList.sort((a,b) => a.id - b.id); break;
       case "도감번호반대순서" :
         SortPoketList = AddKoreanNameList.sort((a,b) => b.id - a.id); break;
@@ -30,7 +32,7 @@ const PokectList:NextPage<{data: PokectmonListType[] | undefined}> = ({data}) =>
       default :
         SortPoketList = AddKoreanNameList.sort((a,b) => a.id - b.id); break;
     }        
-
+  },[setSortValue])
 
     return (
         <PoketListWapper>
