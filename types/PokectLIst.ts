@@ -1,8 +1,8 @@
 export interface PokectmonListType{
     id:number,
     name:string,
-    Kname:string,
     image:string,
+    pokemonName:string,
 }
 
 export interface getPoketmonType {

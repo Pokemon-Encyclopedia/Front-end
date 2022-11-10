@@ -7,7 +7,7 @@ const searchValueAtom = atom<string>({
 
 const PokeListSortAtom = atom<string>({
     key: 'PokeListSortAtom',
-    default: '도감번호순서',
+    default: '',
 })
 
 const installClickedState = atom<boolean>({

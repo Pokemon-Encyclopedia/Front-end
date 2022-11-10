@@ -9,9 +9,11 @@ import { getPokemons } from '../gql'
 import Loading from '../components/loading';
 import React from 'react';
 import DownLoadBtn from '../components/DownLoadBtn';
+import { pokectName } from '../metadata/pokectName';
+
 
 const Home: NextPage = () => {
-const { data , loading } = useQuery<getPoketmonType>(getPokemons,{
+const { data:List , loading } = useQuery<getPoketmonType>(getPokemons,{
     variables : {
       limit:649,
       offset:0,
@@ -19,13 +21,14 @@ const { data , loading } = useQuery<getPoketmonType>(getPokemons,{
   }
 );
 if (loading) {return <Loading />}
+const data = List?.pokemons.results.map((i) => ({...i , pokemonName : pokectName[i.id]} ));
 
   return (
     <>
       <DownLoadBtn />
       <Phead seoTitle="리스트페이지" />
         <InputBox />
-        <PokectList data={data?.pokemons.results} />
+        <PokectList data={data} />
     </>
   )
 }

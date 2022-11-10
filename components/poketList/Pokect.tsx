@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { PokectmonListType } from '../../types';
 import React,{ useCallback } from 'react';
 
-const Pokect:NextPage<PokectmonListType> = ({id, Kname, name, image}) => {
+const Pokect:NextPage<PokectmonListType> = ({id, pokemonName, name, image}) => {
     const router = useRouter();
     const handleClickCard = useCallback(
         (Ename: string) => {
@@ -18,7 +18,7 @@ const Pokect:NextPage<PokectmonListType> = ({id, Kname, name, image}) => {
          <PoketWapper onClick={() => handleClickCard(name)}>
             { image && <Image height={280} width={80} alt={"포켓몬 캐릭터"} src={image} /> }
              <Number>{`No.${id}`}</Number>
-             <Name>{Kname}</Name>
+             <Name>{pokemonName}</Name>
          </PoketWapper>
     )
 }
