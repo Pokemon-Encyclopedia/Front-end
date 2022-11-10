@@ -6,44 +6,41 @@ import { PokectmonListType } from '../../types';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { PokeListSortAtom, searchValueAtom } from '../../Util/recoil/state';
 import { pokectName } from '../../metadata/pokectName';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const PokectList:NextPage<{data: PokectmonListType[] | undefined}> = ({data}) => {
-    const searchValue = useRecoilState(searchValueAtom);
-    const [AddKoreanNameList , setAddKoreanNameList] = useState([]);
-    const setSortValue = useRecoilValue(PokeListSortAtom);
-    let SortPoketList;
+  const searchValue = useRecoilState(searchValueAtom);
+  const [AddKoreanNameList , setAddKoreanNameList] = useState([]);
+  const setSortValue = useRecoilValue(PokeListSortAtom);
 
-    useEffect(() =>{
-      setAddKoreanNameList(data?.map((i) => ({...i , pokectmonName : pokectName[i.id]} )));
-    },[])
+  useEffect(() =>{
+    setAddKoreanNameList(data?.map((i) => ({...i , pokectmonName : pokectName[i.id]} )));
+  },[])
 
-    const filterPoketList = useMemo(() => {return AddKoreanNameList?.filter((data) => data.pokectmonName.includes(searchValue[0].toLocaleString()))},[searchValue]);
-    useMemo(() => {
-      switch(setSortValue){
-        case "도감번호순서" :
-        SortPoketList = AddKoreanNameList.sort((a,b) => a.id - b.id); break;
-      case "도감번호반대순서" :
-        SortPoketList = AddKoreanNameList.sort((a,b) => b.id - a.id); break;
-      case "가나다순서" :
-        SortPoketList = AddKoreanNameList.sort((a,b) => b.pokectmonName > a.pokectmonName ? -1 : 1); break;
-      case "가나다역순서" :
-        SortPoketList = AddKoreanNameList.sort((a,b) => b.pokectmonName < a.pokectmonName ? -1 : 1); break;
-      default :
-        SortPoketList = AddKoreanNameList.sort((a,b) => a.id - b.id); break;
-    }        
+  const filterPoketList = useMemo(() => {return AddKoreanNameList?.filter((data) => data.pokectmonName.includes(searchValue[0].toLocaleString()))},[searchValue]);
+  useMemo(() => {
+    switch(setSortValue){
+      case "도감번호순서" :
+      AddKoreanNameList.sort((a,b) => a.id - b.id); break;
+    case "도감번호반대순서" :
+      AddKoreanNameList.sort((a,b) => b.id - a.id); break;
+    case "가나다순서" :
+      AddKoreanNameList.sort((a,b) => b.pokectmonName > a.pokectmonName ? -1 : 1); break;
+    case "가나다역순서" :
+      AddKoreanNameList.sort((a,b) => b.pokectmonName < a.pokectmonName ? -1 : 1); break;
+    } 
   },[setSortValue])
 
-    return (
-        <PoketListWapper>
-         {AddKoreanNameList && filterPoketList && searchValue ? filterPoketList?.map(i => (
-          <Pokect key={i.id} id={i.id} Kname={i.pokectmonName} name={i.name} image={i.image} />
-          )) : 
-          AddKoreanNameList?.map(i => (
-          <Pokect key={i.id} id={i.id} Kname={i.pokectmonName} name={i.name} image={i.image} />
-          ))}
-        </PoketListWapper>
-    )
+  return (
+    <PoketListWapper>
+      {AddKoreanNameList && filterPoketList && searchValue ? filterPoketList?.map(i => (
+      <Pokect key={i.id} id={i.id} Kname={i.pokectmonName} name={i.name} image={i.image} />
+      )) : 
+      AddKoreanNameList?.map(i => (
+      <Pokect key={i.id} id={i.id} Kname={i.pokectmonName} name={i.name} image={i.image} />
+      ))}
+    </PoketListWapper>
+  )
 }
 
 const PoketListWapper = styled.div`
