@@ -1,13 +1,13 @@
 import { NextPage } from 'next';
 import styled from "@emotion/styled";
-import { getPoketmonIdType, PokectmonListType, PokectmontypeType} from '../../types';
+import { getPoketmonId, PokectmonList, Pokectmontype} from '../../types';
 import Image from "next/image";
 import { PokemonTypesData } from '../../metadata/pokectType';
 import { pokectName } from '../../metadata/pokectName';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
-const PokectDetail:NextPage<{data:getPoketmonIdType , prevPokemon:PokectmonListType,  nextPokemon:PokectmonListType}> = ({data , prevPokemon , nextPokemon}) => {
+const PokectDetail:NextPage<{data:getPoketmonId , prevPokemon:PokectmonList,  nextPokemon:PokectmonList}> = ({data , prevPokemon , nextPokemon}) => {
     const router = useRouter();
     const handleClickCard = useCallback(
         (Ename: string) => {
@@ -59,7 +59,7 @@ const PokectDetail:NextPage<{data:getPoketmonIdType , prevPokemon:PokectmonListT
 
                <Detail>
                 <TypesWapper>
-                { Pokemontypes.map((i:PokectmontypeType , index:number) => <TypesBox key={index} style={{backgroundColor:`${i.color}`}} >{i.value}</TypesBox> )}
+                { Pokemontypes.map((i:Pokectmontype , index:number) => <TypesBox key={index} style={{backgroundColor:`${i.color}`}} >{i.value}</TypesBox> )}
                 </TypesWapper>
 
                 <DetailBox>
@@ -136,7 +136,6 @@ const MidelImgWapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid black;
     @media (max-width: 768px) {
     width: 400px;
     }

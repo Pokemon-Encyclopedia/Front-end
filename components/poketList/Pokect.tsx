@@ -2,10 +2,10 @@ import { NextPage } from 'next';
 import Image from "next/image";
 import { useRouter } from 'next/router';
 import styled from "@emotion/styled";
-import { PokectmonListType } from '../../types';
+import { PokectmonList } from '../../types';
 import React,{ useCallback } from 'react';
 
-const Pokect:NextPage<PokectmonListType> = ({id, pokemonName, name, image}) => {
+const Pokect:NextPage<PokectmonList> = ({id, pokemonName, name, image}) => {
     const router = useRouter();
     const handleClickCard = useCallback(
         (Ename: string) => {
