@@ -6,13 +6,15 @@ import { useQuery } from '@apollo/client';
 import Phead from '../components/Phead'
 import { getPokemons } from '../gql'
 import Loading from '../components/loading';
-import React, { useState } from 'react';
+import React from 'react';
 import DownLoadBtn from '../components/DownLoadBtn';
 import { pokectName } from '../metadata/pokectName';
+import { useRecoilState } from 'recoil';
+import { initPoketmonList } from '../Util/recoil/state';
 
 
 const Home: NextPage = () => {
-const [ FirstPokemonList , setFirstPokemonList ] = useState<PokectmonListType[]>();
+const [, setFirstPokemonList ] = useRecoilState<PokectmonListType[]>(initPoketmonList);
 const { data:List , loading } = useQuery<getPoketmonType>(getPokemons,{
     variables : {
       limit:649,
@@ -21,15 +23,15 @@ const { data:List , loading } = useQuery<getPoketmonType>(getPokemons,{
   }
 );
 if (loading) {return <Loading />}
-setFirstPokemonList(List?.pokemons.results.map((i) => ({...i , pokemonName : pokectName[i.id]} )))
-
+const data = List?.pokemons.results.map((i) => ({...i , pokemonName : pokectName[i.id]} ));
+setFirstPokemonList(List?.pokemons.results)
 
   return (
     <>
       <DownLoadBtn />
       <Phead seoTitle="리스트페이지" />
         <InputBox />
-        <PokectList data={FirstPokemonList} />
+        <PokectList data={data} />
     </>
   )
 }

@@ -16,32 +16,3 @@ export interface Ptype {
     name: string,
   },
 }
-
-export interface PoketmonType {
-  id:number,
-  name:string,
-  height:number,
-  weight:number,
-  order:number,
-  sprites : {
-    back_default:string,
-    front_default:string,
-  }
-  types : {
-    0 : {
-      type : {
-        name : string,
-      }
-    }
-    1 : {
-      type : {
-        name : string,
-      }
-    }
-
-  },
-}
-
-export interface getPoketmonIdType {
-  pokemon :PoketmonType
-}

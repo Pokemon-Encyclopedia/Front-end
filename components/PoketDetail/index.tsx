@@ -18,15 +18,15 @@ const PokectDetail:NextPage<{data:getPoketmonIdType}> = ({data}) => {
         Pokemontypes = PokemonTypesData.filter((i) =>  i.usValue === data?.pokemon.types[0].type.name.toUpperCase())    
     )
 
-    const { data:NextPokemonData , loading } = useQuery<getPoketmonIdType>(
-        getPokemon,{
-            variables: {
-                name: router.query.name,
-            },
-        }
-    );
+    // const { data:NextPokemonData , loading } = useQuery<getPoketmonIdType>(
+    //     getPokemon,{
+    //         variables: {
+    //             name: router.query.name,
+    //         },
+    //     }
+    // );
     
-    console.log(NextPokemonData);
+    // console.log(NextPokemonData);
     
     return (
         <>

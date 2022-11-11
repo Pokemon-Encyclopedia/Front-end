@@ -1,4 +1,5 @@
 import {atom} from "recoil";
+import { PokectmonListType } from "../../types";
 
 const searchValueAtom = atom<string>({
     key: 'searchValueAtom',
@@ -15,5 +16,10 @@ const installClickedState = atom<boolean>({
     default : false,
 })
 
-export {searchValueAtom , PokeListSortAtom , installClickedState};
+const initPoketmonList = atom<PokectmonListType[]>({
+    key:'initPoketmonList',
+    default : [],
+})
+
+export {searchValueAtom , PokeListSortAtom , installClickedState ,initPoketmonList};
 
