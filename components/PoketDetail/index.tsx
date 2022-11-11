@@ -1,15 +1,20 @@
 import { NextPage } from 'next';
 import styled from "@emotion/styled";
-import { getPoketmonIdType, PokectmontypeType} from '../../types';
+import { getPoketmonIdType, PokectmonListType, PokectmontypeType} from '../../types';
 import Image from "next/image";
 import { PokemonTypesData } from '../../metadata/pokectType';
 import { pokectName } from '../../metadata/pokectName';
 import { useRouter } from 'next/router';
-import { getPokemon } from '../../gql';
-import { useQuery } from '@apollo/client';
+import { useCallback } from 'react';
 
-const PokectDetail:NextPage<{data:getPoketmonIdType}> = ({data}) => {
+const PokectDetail:NextPage<{data:getPoketmonIdType , prevPokemon:PokectmonListType,  nextPokemon:PokectmonListType}> = ({data , prevPokemon , nextPokemon}) => {
     const router = useRouter();
+    const handleClickCard = useCallback(
+        (Ename: string) => {
+          router.push(`${Ename}`);
+        },
+        [router],
+    );
     let Pokemontypes;
     const PoketmonName = pokectName[ data?.pokemon.id ?? 0];
     data?.pokemon.types[1] ? (
@@ -17,33 +22,30 @@ const PokectDetail:NextPage<{data:getPoketmonIdType}> = ({data}) => {
     ):(
         Pokemontypes = PokemonTypesData.filter((i) =>  i.usValue === data?.pokemon.types[0].type.name.toUpperCase())    
     )
-
-    // const { data:NextPokemonData , loading } = useQuery<getPoketmonIdType>(
-    //     getPokemon,{
-    //         variables: {
-    //             name: router.query.name,
-    //         },
-    //     }
-    // );
-    
-    // console.log(NextPokemonData);
     
     return (
         <>
-            <BackBtn onClick={() => router.back()}>
+            <BackBtn onClick={() => router.push('./')}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                 </svg>
             </BackBtn>
             <PoketListWapper>
+            
             <ImgWappers>
-            <ImgWapper>
-               <Image width={330}  height={330} layout="fill" alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.pokemon.sprites.front_default ?? ""} />  
-            </ImgWapper>
-            <ImgWapper>
-                <Image width={330} height={330} layout="fill" alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.pokemon.sprites.back_default ?? ""} />
-            </ImgWapper>
+            <PreviewImgWapper>
+                <Image layout="fill" alt={"이전 포켓몬 캐릭터"} objectFit={'cover'} src={prevPokemon.image}  onClick={() => handleClickCard(prevPokemon.name)} />
+            </PreviewImgWapper>
+            <MidelImgWapper>
+                <ImgWapper><Image layout="fill" alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.pokemon.sprites.front_default ?? ""} /></ImgWapper>
+                <ImgWapper><Image layout="fill" alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.pokemon.sprites.back_default ?? ""} /></ImgWapper>
+            </MidelImgWapper>
+            <PreviewImgWapper>
+                <Image layout="fill" alt={"다음 포켓몬 캐릭터"} objectFit={'cover'} src={nextPokemon.image} onClick={() => handleClickCard(nextPokemon.name)}/>
+            </PreviewImgWapper>
+
             </ImgWappers>
+
             <ContentWapper>
                 <Main>
                 <Name>{PoketmonName}</Name>
@@ -98,15 +100,40 @@ const PoketListWapper = styled.div`
     
 `;
 const ImgWappers = styled.div`
-    width: 25%;
-    height: 330px;
+    width: 70%;
+    height: 300px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     @media (max-width: 768px) {
+    width: 700px;
+    }
+`;
+
+const PreviewImgWapper = styled.div`
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0.5;
+    cursor: pointer;
+`;
+
+
+const MidelImgWapper = styled.div`
+    width: 35%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    @media (max-width: 768px) {
     width: 400px;
     }
 `;
+
 const ImgWapper = styled.div`
     position: relative;
     width: 200px;

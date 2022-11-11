@@ -22,19 +22,6 @@ export interface PoketmonType {
     },
   }
 
-export interface PoketmonProviewType {
-    id:number,
-    name:string,
-    sprites : {
-      back_default:string,
-    }
-  }
-
 export interface getPoketmonIdType {
     pokemon :PoketmonType
 }
-
-export interface getPoketmonProviewType {
-    pokemon : PoketmonProviewType;
-}
-  

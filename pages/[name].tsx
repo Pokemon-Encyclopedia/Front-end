@@ -21,25 +21,13 @@ const PokectDetailPage:NextPage = () => {
             },
         }
     );
-    const { name } = FirstPokemonList.find(ary => ary.name === QueryName)
-    const { data:nextPokemon } = useQuery<getPoketmonIdType>(
-        getPokemon,{
-            variables: {
-                name: QueryName,
-            },
-        }
-        );
-        
-    
-        if (loading) {return <Loading />}
-    // const PoketmonName = pokectName[ data?.pokemon.id ?? 0];
-    
-
+    if (loading) {return <Loading />}
+    const { id } = FirstPokemonList.find(ary => ary.name === QueryName)         
 
     return (
         <>
         <Layout seoTitle={"상세페이지"} />
-            <PokectDetail data={data} />
+            <PokectDetail data={data} prevPokemon={FirstPokemonList[id-2]} nextPokemon={FirstPokemonList[id]} />
         </>
     )
 }
