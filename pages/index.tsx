@@ -10,11 +10,11 @@ import React from 'react';
 import DownLoadBtn from '../components/DownLoadBtn';
 import { pokectName } from '../metadata/pokectName';
 import { useRecoilState } from 'recoil';
-import { initPoketmonList } from '../Util/recoil/state';
+import { MainPoketmonList } from '../Util/recoil/state';
 
 
 const Home: NextPage = () => {
-const [, setFirstPokemonList ] = useRecoilState<PokectmonListType[]>(initPoketmonList);
+const [, setMainPokemonList ] = useRecoilState<PokectmonListType[]>(MainPoketmonList);
 const { data:List , loading } = useQuery<getPoketmonType>(getPokemons,{
     variables : {
       limit:649,
@@ -24,7 +24,7 @@ const { data:List , loading } = useQuery<getPoketmonType>(getPokemons,{
 );
 if (loading) {return <Loading />}
 const data = List?.pokemons.results.map((i) => ({...i , pokemonName : pokectName[i.id]} ));
-setFirstPokemonList(List?.pokemons.results)
+setMainPokemonList(List?.pokemons.results)
 
   return (
     <>

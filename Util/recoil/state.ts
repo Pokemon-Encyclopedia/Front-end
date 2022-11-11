@@ -16,10 +16,10 @@ const installClickedState = atom<boolean>({
     default : false,
 })
 
-const initPoketmonList = atom<PokectmonListType[]>({
+const MainPoketmonList = atom<PokectmonListType[]>({
     key:'initPoketmonList',
     default : [],
 })
 
-export {searchValueAtom , PokeListSortAtom , installClickedState ,initPoketmonList};
+export {searchValueAtom , PokeListSortAtom , installClickedState ,MainPoketmonList};
 

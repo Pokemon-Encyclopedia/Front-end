@@ -33,17 +33,22 @@ const PokectDetail:NextPage<{data:getPoketmonIdType , prevPokemon:PokectmonListT
             <PoketListWapper>
             
             <ImgWappers>
-            <PreviewImgWapper>
-                <Image layout="fill" alt={"이전 포켓몬 캐릭터"} objectFit={'cover'} src={prevPokemon.image}  onClick={() => handleClickCard(prevPokemon.name)} />
-            </PreviewImgWapper>
+            { prevPokemon ? (
+                <PreviewImgWapper>
+                    <Image layout="fill" alt={"이전 포켓몬 캐릭터"} objectFit={'cover'} src={prevPokemon.image}  onClick={() => handleClickCard(prevPokemon.name)} />
+                </PreviewImgWapper>
+            ) : <PreviewImgWapper />
+            }
             <MidelImgWapper>
                 <ImgWapper><Image layout="fill" alt={"포켓몬 캐릭터 앞모습"} objectFit={'cover'} src={data?.pokemon.sprites.front_default ?? ""} /></ImgWapper>
                 <ImgWapper><Image layout="fill" alt={"포켓몬 캐릭터 뒷모습"} objectFit={'cover'} src={data?.pokemon.sprites.back_default ?? ""} /></ImgWapper>
             </MidelImgWapper>
-            <PreviewImgWapper>
-                <Image layout="fill" alt={"다음 포켓몬 캐릭터"} objectFit={'cover'} src={nextPokemon.image} onClick={() => handleClickCard(nextPokemon.name)}/>
-            </PreviewImgWapper>
-
+            { nextPokemon ? (
+                <PreviewImgWapper>
+                    <Image layout="fill" alt={"다음 포켓몬 캐릭터"} objectFit={'cover'} src={nextPokemon.image} onClick={() => handleClickCard(nextPokemon.name)}/>
+                </PreviewImgWapper>
+            ) : <PreviewImgWapper />
+            }
             </ImgWappers>
 
             <ContentWapper>
@@ -118,7 +123,10 @@ const PreviewImgWapper = styled.div`
     justify-content: space-between;
     align-items: center;
     opacity: 0.5;
-    cursor: pointer;
+
+    img{
+        cursor: pointer;
+    }
 `;
 
 

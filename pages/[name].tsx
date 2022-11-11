@@ -8,12 +8,12 @@ import PokectDetail from '../components/PoketDetail';
 import Loading from '../components/loading';
 import { pokectName } from '../metadata/pokectName';
 import { useRecoilState } from 'recoil';
-import { initPoketmonList } from '../Util/recoil/state';
+import { MainPoketmonList } from '../Util/recoil/state';
 
 const PokectDetailPage:NextPage = () => {
     const router = useRouter();
     const QueryName = router.query.name;
-    const [ FirstPokemonList , setFirstPokemonList ] = useRecoilState<PokectmonListType[]>(initPoketmonList);
+    const [ MainPokemonList , ] = useRecoilState<PokectmonListType[]>(MainPoketmonList);
     const { data , loading } = useQuery<getPoketmonIdType>(
         getPokemon,{
             variables: {
@@ -22,12 +22,12 @@ const PokectDetailPage:NextPage = () => {
         }
     );
     if (loading) {return <Loading />}
-    const { id } = FirstPokemonList.find(ary => ary.name === QueryName)         
+    const { id } = MainPokemonList.find(ary => ary.name === QueryName)         
 
     return (
         <>
         <Layout seoTitle={"상세페이지"} />
-            <PokectDetail data={data} prevPokemon={FirstPokemonList[id-2]} nextPokemon={FirstPokemonList[id]} />
+            <PokectDetail data={data} prevPokemon={MainPokemonList[id-2]} nextPokemon={MainPokemonList[id]} />
         </>
     )
 }
