@@ -16,7 +16,7 @@ export default function MyDocument() {
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="images/icons/icon-192x192.png"></link>
         <meta name="msapplication-TileColor" content="#fefefe"></meta>  
-        <meta name="theme-color" content="#db5945" />
+        <meta name="theme-color" content="#763474" />
 
         <link href="images/splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
         <link href="images/splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />

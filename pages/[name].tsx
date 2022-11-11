@@ -6,6 +6,7 @@ import Layout from '../components/Phead';
 import { useRouter } from 'next/router';
 import PokectDetail from '../components/PoketDetail';
 import Loading from '../components/loading';
+import { pokectName } from '../metadata/pokectName';
 
 const PokectDetailPage:NextPage = () => {
     const router = useRouter();
@@ -16,6 +17,9 @@ const PokectDetailPage:NextPage = () => {
             },
         }
     );
+    const PoketmonName = pokectName[ data?.pokemon.id ?? 0];
+
+
     if (loading) {return <Loading />}
     return (
         <>

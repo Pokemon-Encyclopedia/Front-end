@@ -4,17 +4,37 @@ import { getPoketmonIdType, PokectmontypeType} from '../../types';
 import Image from "next/image";
 import { PokemonTypesData } from '../../metadata/pokectType';
 import { pokectName } from '../../metadata/pokectName';
+import { useRouter } from 'next/router';
+import { getPokemon } from '../../gql';
+import { useQuery } from '@apollo/client';
 
 const PokectDetail:NextPage<{data:getPoketmonIdType}> = ({data}) => {
+    const router = useRouter();
     let Pokemontypes;
     const PoketmonName = pokectName[ data?.pokemon.id ?? 0];
-    if(data?.pokemon.types[1]){
+    data?.pokemon.types[1] ? (
         Pokemontypes = PokemonTypesData.filter((i) =>  i.usValue === data?.pokemon.types[0].type.name.toUpperCase() ||  i.usValue === data?.pokemon.types[1].type.name.toUpperCase())    
-    }else{
+    ):(
         Pokemontypes = PokemonTypesData.filter((i) =>  i.usValue === data?.pokemon.types[0].type.name.toUpperCase())    
-    }
+    )
+
+    const { data:NextPokemonData , loading } = useQuery<getPoketmonIdType>(
+        getPokemon,{
+            variables: {
+                name: router.query.name,
+            },
+        }
+    );
+    
+    console.log(NextPokemonData);
+    
     return (
         <>
+            <BackBtn onClick={() => router.back()}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+            </BackBtn>
             <PoketListWapper>
             <ImgWappers>
             <ImgWapper>
@@ -45,6 +65,22 @@ const PokectDetail:NextPage<{data:getPoketmonIdType}> = ({data}) => {
         </>
     )
 }
+
+const BackBtn = styled.div`
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    color:black;
+    border-radius: 10px;
+
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    &:hover{
+        scale: calc(1.1);
+    }
+`;
 
 const PoketListWapper = styled.div`
     width: 100%;
