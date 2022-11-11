@@ -1,4 +1,4 @@
-export interface PoketmonType {
+export interface Poketmon {
     id:number,
     name:string,
     height:number,
@@ -22,6 +22,6 @@ export interface PoketmonType {
     },
   }
 
-export interface getPoketmonIdType {
-    pokemon :PoketmonType
+export interface getPoketmonId {
+    pokemon :Poketmon
 }

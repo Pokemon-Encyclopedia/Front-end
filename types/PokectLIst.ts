@@ -1,18 +1,12 @@
-export interface PokectmonListType{
+export interface PokectmonList{
     id:number,
     name:string,
     image:string,
     pokemonName:string,
 }
 
-export interface getPoketmonType {
+export interface getPoketmon {
   pokemons : {
-    results :PokectmonListType[]
+    results :PokectmonList[]
   }
-}
-
-export interface Ptype {
-  type : {
-    name: string,
-  },
 }

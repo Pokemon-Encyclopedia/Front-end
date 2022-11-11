@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { getPoketmonIdType, PokectmonListType } from '../types';
+import { getPoketmonId, PokectmonList } from '../types';
 import { useQuery } from '@apollo/client';
 import { getPokemon } from '../gql';
 import Layout from '../components/Phead';
@@ -13,8 +13,8 @@ import { MainPoketmonList } from '../Util/recoil/state';
 const PokectDetailPage:NextPage = () => {
     const router = useRouter();
     const QueryName = router.query.name;
-    const [ MainPokemonList , ] = useRecoilState<PokectmonListType[]>(MainPoketmonList);
-    const { data , loading } = useQuery<getPoketmonIdType>(
+    const [ MainPokemonList , ] = useRecoilState<PokectmonList[]>(MainPoketmonList);
+    const { data , loading } = useQuery<getPoketmonId>(
         getPokemon,{
             variables: {
                 name: QueryName,

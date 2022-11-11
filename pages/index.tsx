@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import InputBox from '../components/inputBox'
 import PokectList from '../components/poketList'
-import { getPoketmonType, PokectmonListType } from '../types';
+import { getPoketmon, PokectmonList } from '../types';
 import { useQuery } from '@apollo/client';
 import Phead from '../components/Phead'
 import { getPokemons } from '../gql'
@@ -14,8 +14,8 @@ import { MainPoketmonList } from '../Util/recoil/state';
 
 
 const Home: NextPage = () => {
-const [, setMainPokemonList ] = useRecoilState<PokectmonListType[]>(MainPoketmonList);
-const { data:List , loading } = useQuery<getPoketmonType>(getPokemons,{
+const [, setMainPokemonList ] = useRecoilState<PokectmonList[]>(MainPoketmonList);
+const { data:List , loading } = useQuery<getPoketmon>(getPokemons,{
     variables : {
       limit:649,
       offset:0,
