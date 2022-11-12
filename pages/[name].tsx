@@ -21,7 +21,7 @@ const PokectDetailPage:NextPage = () => {
         }
     );
     if (loading) {return <Loading />}
-    const { id } = MainPokemonList.find(ary => ary.name === QueryName)         
+    let { id } = MainPokemonList.find(ary => ary.name === QueryName);
 
     return (
         <>

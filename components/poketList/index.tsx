@@ -8,13 +8,14 @@ import { useEffect, useMemo, useState } from 'react';
 
 const PokectList:NextPage<{data: PokectmonList[] | undefined}> = ({data}) => {
   const searchValue = useRecoilState(searchValueAtom);
-  const [AddKoreanNameList , setAddKoreanNameList] = useState(data);
+  const [AddKoreanNameList , setAddKoreanNameList] = useState([]);
   const setSortValue = useRecoilValue(PokeListSortAtom);  
   const [, setMainPokemonList ] = useRecoilState<PokectmonList[]>(MainPoketmonList);
 
   useEffect(()=> {
-    setMainPokemonList(data)
-  },[])
+    setMainPokemonList(data);
+    setAddKoreanNameList(data)
+  },[]);
 
   const filterPoketList = useMemo(() => {return AddKoreanNameList?.filter((data) => data.pokemonName.includes(searchValue[0].toLocaleString()))},[searchValue]);
   useMemo(() => {
@@ -30,6 +31,8 @@ const PokectList:NextPage<{data: PokectmonList[] | undefined}> = ({data}) => {
       setAddKoreanNameList(List.sort((a,b) => b.pokemonName < a.pokemonName ? -1 : 1)); break;
     } 
   },[setSortValue])
+
+
 
   return (
     <PoketListWapper>

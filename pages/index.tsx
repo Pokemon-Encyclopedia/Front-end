@@ -32,4 +32,4 @@ const data = List?.pokemons.results.map((i) => ({...i , pokemonName : pokectName
   )
 }
 
-export default React.memo(Home);
+export default Home;
