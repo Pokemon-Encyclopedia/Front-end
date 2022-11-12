@@ -6,7 +6,6 @@ import Layout from '../components/Phead';
 import { useRouter } from 'next/router';
 import PokectDetail from '../components/PoketDetail';
 import Loading from '../components/loading';
-import { pokectName } from '../metadata/pokectName';
 import { useRecoilState } from 'recoil';
 import { MainPoketmonList } from '../Util/recoil/state';
 

@@ -1,16 +1,20 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { NextPage } from 'next';
 import styled from "@emotion/styled";
 import Pokect from './Pokect';
 import { PokectmonList } from '../../types';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { PokeListSortAtom, searchValueAtom } from '../../Util/recoil/state';
-import { useMemo, useState } from 'react';
+import { MainPoketmonList, PokeListSortAtom, searchValueAtom } from '../../Util/recoil/state';
+import { useEffect, useMemo, useState } from 'react';
 
 const PokectList:NextPage<{data: PokectmonList[] | undefined}> = ({data}) => {
   const searchValue = useRecoilState(searchValueAtom);
   const [AddKoreanNameList , setAddKoreanNameList] = useState(data);
   const setSortValue = useRecoilValue(PokeListSortAtom);  
+  const [, setMainPokemonList ] = useRecoilState<PokectmonList[]>(MainPoketmonList);
+
+  useEffect(()=> {
+    setMainPokemonList(data)
+  },[])
 
   const filterPoketList = useMemo(() => {return AddKoreanNameList?.filter((data) => data.pokemonName.includes(searchValue[0].toLocaleString()))},[searchValue]);
   useMemo(() => {
