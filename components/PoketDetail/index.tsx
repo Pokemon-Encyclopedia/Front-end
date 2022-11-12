@@ -5,18 +5,16 @@ import Image from "next/image";
 import { PokemonTypesData } from '../../metadata/pokectType';
 import { pokectName } from '../../metadata/pokectName';
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
 
 const PokectDetail:NextPage<{data:getPoketmonId , prevPokemon:PokectmonList,  nextPokemon:PokectmonList}> = ({data , prevPokemon , nextPokemon}) => {
     const router = useRouter();
-    const handleClickCard = useCallback(
-        (Ename: string) => {
-          router.push(`${Ename}`);
-        },
-        [router],
-    );
-    let Pokemontypes;
+    let Pokemontypes : Pokectmontype[];
     const PoketmonName = pokectName[ data?.pokemon.id ?? 0];
+
+    const handleClickCard = (Ename: string) => {
+          router.push(`${Ename}`);
+    }
+
     data?.pokemon.types[1] ? (
         Pokemontypes = PokemonTypesData.filter((i) =>  i.usValue === data?.pokemon.types[0].type.name.toUpperCase() ||  i.usValue === data?.pokemon.types[1].type.name.toUpperCase())    
     ):(
@@ -117,8 +115,8 @@ const ImgWappers = styled.div`
 
 const PreviewImgWapper = styled.div`
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     display: flex;
     justify-content: space-between;
     align-items: center;

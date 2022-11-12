@@ -5,41 +5,42 @@ import { PokectmonList } from '../../types';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { MainPoketmonList, PokeListSortAtom, searchValueAtom } from '../../Util/recoil/state';
 import { useEffect, useMemo, useState } from 'react';
+import React from 'react';
 
-const PokectList:NextPage<{data: PokectmonList[] | undefined}> = ({data}) => {
+const PokectList:NextPage<{data: PokectmonList[]}> = ({data}) => {
   const searchValue = useRecoilState(searchValueAtom);
-  const [AddKoreanNameList , setAddKoreanNameList] = useState([]);
+
+  const [PoList , setPoList] =  useState<PokectmonList[]>();
   const setSortValue = useRecoilValue(PokeListSortAtom);  
   const [, setMainPokemonList ] = useRecoilState<PokectmonList[]>(MainPoketmonList);
-
+    
   useEffect(()=> {
+    setPoList(data);
     setMainPokemonList(data);
-    setAddKoreanNameList(data)
-  },[]);
-
-  const filterPoketList = useMemo(() => {return AddKoreanNameList?.filter((data) => data.pokemonName.includes(searchValue[0].toLocaleString()))},[searchValue]);
+  },[data]);
+  
+  const filterPoketList = PoList?.filter((data) => data.pokemonName.includes(searchValue[0].toLocaleString()));
+  
   useMemo(() => {
-    const List = [...AddKoreanNameList];
+    const List = [...data];
     switch(setSortValue){
     case "도감번호순서" :
-      setAddKoreanNameList(List.sort((a,b) => a.id - b.id)); break;
+      setPoList(List.sort((a,b) => a.id - b.id)); break;
     case "도감번호반대순서" :
-      setAddKoreanNameList(List.sort((a,b) => b.id - a.id)); break;
+      setPoList(List.sort((a,b) => b.id - a.id)); break;
     case "가나다순서" :
-      setAddKoreanNameList(List.sort((a,b) => b.pokemonName > a.pokemonName ? -1 : 1)); break;
+      setPoList(List.sort((a,b) => b.pokemonName > a.pokemonName ? -1 : 1)); break;
     case "가나다역순서" :
-      setAddKoreanNameList(List.sort((a,b) => b.pokemonName < a.pokemonName ? -1 : 1)); break;
+      setPoList(List.sort((a,b) => b.pokemonName < a.pokemonName ? -1 : 1)); break;
     } 
   },[setSortValue])
 
-
-
   return (
     <PoketListWapper>
-      {AddKoreanNameList && filterPoketList && searchValue ? filterPoketList?.map(i => (
+      {PoList && filterPoketList && searchValue ? filterPoketList?.map(i => (
       <Pokect key={i.id} id={i.id} name={i.name} image={i.image} pokemonName={i.pokemonName} />
       )) : 
-      AddKoreanNameList?.map(i => (
+      PoList?.map(i => (
       <Pokect key={i.id} id={i.id} name={i.name} image={i.image} pokemonName={i.pokemonName} />
       ))}
 
@@ -63,4 +64,4 @@ const PoketListWapper = styled.div`
   }
 `;
 
-export default PokectList;
+export default React.memo(PokectList);
